@@ -68,7 +68,7 @@ package com.example.rconnolly.recipeapplication;
 //            }
 //            recipeStr = buffer.toString();
 //
-//            Log.v(LOG_TAG, "Recipe JSON String: " + recipeStr);
+//            Log.v(LOG_TAG, "RecipeModel JSON String: " + recipeStr);
 //
 //        } catch (IOException e) {
 //            Log.e(LOG_TAG, "Error", e);
@@ -103,14 +103,14 @@ package com.example.rconnolly.recipeapplication;
 //        final String SOURCE = "source";
 //        final String SOURCE_ICON = "sourceIcon";
 //        final String DIET_LABELS = "dietLabels";
-//        final List<Recipe.Ingredients> INGREDIENTS;
+//        final List<RecipeModel.Ingredients> INGREDIENTS;
 //
 //        JSONObject recipeJson = new JSONObject(recipeStr);
 //        JSONArray recipeArray = recipeJson.getJSONArray(LIST);
 //
 //        JSONObject finalObject = recipeArray.getJSONObject(0);
 //
-//        Recipe recipeModel = new Recipe();
+//        RecipeModel recipeModel = new RecipeModel();
 //        recipeModel.setLabel(finalObject.getString(LIST));
 //
 //

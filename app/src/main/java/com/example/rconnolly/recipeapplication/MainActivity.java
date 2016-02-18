@@ -18,7 +18,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.rconnolly.recipeapplication.models.Recipe;
+import com.example.rconnolly.recipeapplication.models.RecipeModel;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static TextView secondTextView;
     private Button button;
 
-    private List<Recipe> recipes2;
+    private List<RecipeModel> recipes2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class RecipeAdapter extends ArrayAdapter {
 
-        private List<Recipe> recipeModelList;
+        private List<RecipeModel> recipeModelList;
         private int resource;
         private LayoutInflater inflater;
         private View customView;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         //private String[] recipeLabels;
 
-        public RecipeAdapter(Context context, int resource, List<Recipe> recipes) {
+        public RecipeAdapter(Context context, int resource, List<RecipeModel> recipes) {
             super(context, resource, recipes);
 
             recipeModelList = recipes;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class FetchRecipeTask extends AsyncTask<String, Void, List<Recipe>> {
+    public class FetchRecipeTask extends AsyncTask<String, Void, List<RecipeModel>> {
 
         private final String LOG_TAG = FetchRecipeTask.class.getSimpleName();
 
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<Recipe> doInBackground(String... params) {
+        protected List<RecipeModel> doInBackground(String... params) {
             if (params.length == 0) {
                 return null;
             }
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 recipeStr = buffer.toString();
 
-                Log.v(LOG_TAG, "Recipe JSON String: " + recipeStr);
+                Log.v(LOG_TAG, "RecipeModel JSON String: " + recipeStr);
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error", e);
@@ -231,47 +232,58 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
-        private List<Recipe> getRecipeDataFromJson(String recipeStr) throws JSONException {
+        private List<RecipeModel> getRecipeDataFromJson(String recipeStr) throws JSONException {
 
             final String LIST = "label";
             final String IMAGE = "image";
             final String SOURCE = "source";
             final String SOURCE_ICON = "sourceIcon";
             final String DIET_LABELS = "dietLabels";
-            final List<Recipe.Ingredients> INGREDIENTS;
+            final String INGREDIENTS = "ingredientLines";
 
-            JSONObject recipeJson = new JSONObject(recipeStr);
-            JSONArray recipeArray = recipeJson.getJSONArray(LIST);
+            JSONObject parentObject = new JSONObject(recipeStr);
+            JSONArray hitsArray = parentObject.getJSONArray("hits");
 
-            String recipeLabel = null;
-            Recipe recipeModel = new Recipe();
-            List<Recipe> recipeList = new ArrayList<>();
+            //RecipeModel recipeModel = new RecipeModel();
+            List<RecipeModel> recipeModelList = new ArrayList<>();
 
+            Gson gson = new Gson();
+            JSONObject recipeObject = null;
+
+            StringBuffer finalBufferedData = new StringBuffer();
             //Gson gson = new Gson();
-            for (int i = 0; i < recipeArray.length(); i++) {
+            for (int i = 0; i < hitsArray.length(); i++) {
 
-                JSONObject finalObject = recipeArray.getJSONObject(i);
-                //recipeModel = gson.fromJson(finalObject.toString(), Recipe.class);
+                recipeObject = hitsArray.getJSONObject(i);
+                RecipeModel recipeModel = gson.fromJson(recipeObject.toString(), RecipeModel.class);
 
-                recipeLabel = finalObject.getString("source");
+//                for (int j = 0; j < recipeObject.length(); j++) {
+//
+//                    String uri = recipeObject.getString("uri");
+//                    String label = recipeObject.getString("label");
+//                    String image = recipeObject.getString("image");
+//                    String source = recipeObject.getString("source");
+//                    String sourceIcon = recipeObject.getString("sourceIcon");
+//                    String url = recipeObject.getString("url");
+//                    String ingredientLines = recipeObject.getString("ingredientLines");
+//                }
+                recipeModelList.add(recipeModel);
             }
-
-            recipeList.add(recipeModel);
-            return recipeList;
+            return recipeModelList;
         }
 
         @Override
-        protected void onPostExecute(List<Recipe> result) {
+        protected void onPostExecute(List<RecipeModel> result) {
 
             if (result != null) {
 //                mForecastAdapter.clear();
 //                for (String dayForecastStr : result) {
 //                    mForecastAdapter.add(dayForecastStr);
 //                }
-//                ListAdapter mAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
-//                ListView mList = (ListView) findViewById(R.id.main_activity_list);
-//
-//                mList.setAdapter(mAdapter);
+                ListAdapter mAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
+                ListView mList = (ListView) findViewById(R.id.main_activity_list);
+
+                mList.setAdapter(mAdapter);
             }
         }
     }
