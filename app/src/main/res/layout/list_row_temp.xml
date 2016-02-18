@@ -13,16 +13,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ivRecipeImage"
-                android:layout_width="120dp"
-                android:layout_height="160dp" />
+            <!--<ImageView-->
+                <!--android:id="@+id/ivRecipeImage"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="160dp" />-->
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_gravity="center" />
+            <!--<ProgressBar-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/progressBar"-->
+                <!--android:layout_gravity="center" />-->
         </FrameLayout>
 
         <LinearLayout
@@ -39,6 +39,13 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/tvRecipeUri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recipe_uri"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
                 android:id="@+id/tvRecipeSource"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,11 +60,18 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/tvRecipeDietLabel"
+                android:id="@+id/tvRecipeUrl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/diet_labels"
+                android:text="@string/recipe_url"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvRecipeDietLabel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/diet_labels"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
         </LinearLayout>
     </LinearLayout>
@@ -74,12 +88,12 @@
             android:id="@+id/rbRecipeRating"
             android:stepSize=".5" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/ingredients"
-            android:id="@+id/tvRecipeIngredients" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/ingredients"-->
+            <!--android:id="@+id/tvRecipeIngredients" />-->
 
     </LinearLayout>
 

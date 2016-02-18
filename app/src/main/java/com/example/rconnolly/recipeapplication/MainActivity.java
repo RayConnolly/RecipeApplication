@@ -1,10 +1,10 @@
 package com.example.rconnolly.recipeapplication;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,10 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
@@ -36,33 +33,34 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static TextView firstTextView;
-    private static TextView secondTextView;
-    private Button button;
+    //private ArrayAdapter<String> mRecipeAdapter;
+    private RecipeAdapter recipeAdapter;
+    private List<RecipeModel> recipes;
 
-    private List<RecipeModel> recipes2;
+    private ListView lvRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        lvRecipes = (ListView)findViewById(R.id.main_activity_list);
+        updateRecipes();
+//        setHasOptionsMenu(true);
 
-        final String[] recipes = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortillas", "Fillet Steak"};
-        final String[] recipeDescriptions = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortilla", "Fillet Steak"};
-        final Integer[] recipesImages = {R.drawable.chicken_carbonarra, R.drawable.chicken_tikka, R.drawable.chicken_korma, R.drawable.lasagne, R.drawable.pizza, R.drawable.tortillas, R.drawable.fillet_steak};
+//        final String[] recipes = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortillas", "Fillet Steak"};
+//        final String[] recipeDescriptions = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortilla", "Fillet Steak"};
+//        final Integer[] recipesImages = {R.drawable.chicken_carbonarra, R.drawable.chicken_tikka, R.drawable.chicken_korma, R.drawable.lasagne, R.drawable.pizza, R.drawable.tortillas, R.drawable.fillet_steak};
 
 //        ListAdapter mAdapter = new CustomListAdapter(this, recipesImages, recipes, recipeDescriptions);
 //        ListView mList = (ListView) findViewById(R.id.main_activity_list);
 //
 //        mList.setAdapter(mAdapter);
 
-        ListAdapter mAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, recipes2);
-        ListView mList = (ListView) findViewById(R.id.main_activity_list);
-
-        mList.setAdapter(mAdapter);
+//        ListAdapter mAdapter = new RecipeAdapter(this, recipes2);
+//        ListView mList = (ListView) findViewById(R.id.main_activity_list);
+//
+//        mList.setAdapter(mAdapter);
 //
 //        mList.setOnItemClickListener(
 //                new AdapterView.OnItemClickListener() {
@@ -87,63 +85,27 @@ public class MainActivity extends AppCompatActivity {
 //        );
     }
 
-    public class RecipeAdapter extends ArrayAdapter {
-
-        private List<RecipeModel> recipeModelList;
-        private int resource;
-        private LayoutInflater inflater;
-        private View customView;
-
-        //private ImageView ivRecipeImage;
-        private TextView tvRecipeLabel;
-        private TextView tvRecipeSource;
-        private TextView tvRecipeSourceIcon;
-        private TextView tvRecipeDietLabel;
-        private RatingBar rbRecipeRating;
-        private TextView tvRecipeIngredients;
-
-        //private String[] recipeLabels;
-
-        public RecipeAdapter(Context context, int resource, List<RecipeModel> recipes) {
-            super(context, resource, recipes);
-
-            recipeModelList = recipes;
-            this.resource = resource;
-
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            inflater = LayoutInflater.from(getContext());
-            customView = inflater.inflate(R.layout.list_row_temp, parent, false);
-
-            initViews();
-
-            //tvRecipeLabel.setText(tvRecipeLabel[position]);
-
-            return null;
-        }
-
-        private void initViews() {
-
-            //ivRecipeImage = (ImageView) customView.findViewById(R.id.recipe_image);
-            tvRecipeLabel = (TextView) customView.findViewById(R.id.recipe_title_text);
-            tvRecipeSource = (TextView) customView.findViewById(R.id.tvRecipeSource);
-            tvRecipeSourceIcon = (TextView) customView.findViewById(R.id.tvRecipeSourceIcon);
-            tvRecipeDietLabel = (TextView) customView.findViewById(R.id.tvRecipeDietLabel);
-            rbRecipeRating =(RatingBar) customView.findViewById(R.id.rbRecipeRating);
-            tvRecipeIngredients = (TextView) customView.findViewById(R.id.tvRecipeIngredients);
-        }
-
+    @Override
+    public void onStart() {
+        super.onStart();
 
     }
 
-    public class FetchRecipeTask extends AsyncTask<String, Void, List<RecipeModel>> {
+    private void updateRecipes() {
+        FetchRecipeTask recipeTask = new FetchRecipeTask();
+        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=2&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+    }
+
+    public class FetchRecipeTask extends AsyncTask<String, String, List<RecipeModel>> {
 
         private final String LOG_TAG = FetchRecipeTask.class.getSimpleName();
 
-        public FetchRecipeTask() {
+//        public FetchRecipeTask() {
+//        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
 
         @Override
@@ -163,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 //String tempUrl = "https://www.edamam.com/search?q=beef&from=0&to=10&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}";
-                final String RECIPE_BASE_URL = "https://www.edamam.com/search?";
+//                final String RECIPE_BASE_URL = "https://www.edamam.com/search?";
+                final String RECIPE_BASE_URL = "https://www.edamam.com/search?q=beef&from=0&to=2&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}";
+
                 final String QUERY_PARAM = "q";
                 //final String RECIPES_PARAM = "count";
                 final String RECIPES_FROM = "from";
@@ -171,29 +135,35 @@ public class MainActivity extends AppCompatActivity {
                 //final String APPID_ID = "app_id";
                 final String APP_KEY = "app_key";
 
-                Uri builtUri = Uri.parse(RECIPE_BASE_URL).buildUpon()
-                        .appendQueryParameter(QUERY_PARAM, params[0])
-                        .appendQueryParameter(RECIPES_FROM, Integer.toString(from))
-                        .appendQueryParameter(RECIPES_TO, Integer.toString(to))
-                        .appendQueryParameter(APP_KEY, BuildConfig.RECIPE_API_KEY)
-                        .build();
+//                 Uri builtUri = Uri.parse(RECIPE_BASE_URL).buildUpon()
+//                        .appendQueryParameter(QUERY_PARAM, params[0])
+//                        .appendQueryParameter(RECIPES_FROM, Integer.toString(from))
+//                        .appendQueryParameter(RECIPES_TO, Integer.toString(to))
+//                        .appendQueryParameter(APP_KEY, BuildConfig.RECIPE_API_KEY)
+//                        .build();
+//
+//                URL url = new URL(builtUri.toString());
 
-                URL url = new URL(builtUri.toString());
+//                Log.v(LOG_TAG, "Built URI: " + builtUri.toString());
 
-                Log.v(LOG_TAG, "Built URI: " + builtUri.toString());
+                URL url = new URL(params[0]);
+
+                //URL url = new URL(RECIPE_BASE_URL);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
 
                 InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
+
                 if (inputStream == null) {
                     return null;
                 }
                 reader = new BufferedReader(new InputStreamReader(inputStream));
 
+                StringBuffer buffer = new StringBuffer();
                 String line = "";
+
                 while ((line = reader.readLine()) != null) {
 
                     buffer.append(line + "\n");
@@ -234,13 +204,6 @@ public class MainActivity extends AppCompatActivity {
 
         private List<RecipeModel> getRecipeDataFromJson(String recipeStr) throws JSONException {
 
-            final String LIST = "label";
-            final String IMAGE = "image";
-            final String SOURCE = "source";
-            final String SOURCE_ICON = "sourceIcon";
-            final String DIET_LABELS = "dietLabels";
-            final String INGREDIENTS = "ingredientLines";
-
             JSONObject parentObject = new JSONObject(recipeStr);
             JSONArray hitsArray = parentObject.getJSONArray("hits");
 
@@ -248,13 +211,12 @@ public class MainActivity extends AppCompatActivity {
             List<RecipeModel> recipeModelList = new ArrayList<>();
 
             Gson gson = new Gson();
-            JSONObject recipeObject = null;
 
             StringBuffer finalBufferedData = new StringBuffer();
-            //Gson gson = new Gson();
+
             for (int i = 0; i < hitsArray.length(); i++) {
 
-                recipeObject = hitsArray.getJSONObject(i);
+                JSONObject recipeObject = hitsArray.getJSONObject(i);
                 RecipeModel recipeModel = gson.fromJson(recipeObject.toString(), RecipeModel.class);
 
 //                for (int j = 0; j < recipeObject.length(); j++) {
@@ -265,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 //                    String source = recipeObject.getString("source");
 //                    String sourceIcon = recipeObject.getString("sourceIcon");
 //                    String url = recipeObject.getString("url");
-//                    String ingredientLines = recipeObject.getString("ingredientLines");
+//                    //String ingredientLines = recipeObject.getString("ingredientLines");
 //                }
                 recipeModelList.add(recipeModel);
             }
@@ -275,16 +237,68 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<RecipeModel> result) {
 
-            if (result != null) {
-//                mForecastAdapter.clear();
-//                for (String dayForecastStr : result) {
-//                    mForecastAdapter.add(dayForecastStr);
+//            if (result != null) {
+//                recipeAdapter.clear();
+//                for (RecipeModel recipeStr : result) {
+//                    recipeAdapter.add(recipeStr.toString());
 //                }
-                ListAdapter mAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
-                ListView mList = (ListView) findViewById(R.id.main_activity_list);
+//
+//            }
+            recipeAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
+            lvRecipes = (ListView) findViewById(R.id.main_activity_list);
 
-                mList.setAdapter(mAdapter);
-            }
+            lvRecipes.setAdapter(recipeAdapter);
+        }
+    }
+
+    public class RecipeAdapter extends ArrayAdapter {
+
+        private List<RecipeModel> recipeModelList;
+        private int resource;
+        private LayoutInflater inflater;
+
+        private TextView tvRecipeUri;
+        private TextView tvRecipeLabel;
+        private TextView tvRecipeSource;
+        private TextView tvRecipeSourceIcon;
+        private TextView tvRecipeUrl;
+        // private ImageView ivRecipeImage;
+        // private TextView tvRecipeDietLabel;
+        // private RatingBar rbRecipeRating;
+        // private TextView tvRecipeIngredients;
+
+        public RecipeAdapter(Context context, int resource, List<RecipeModel> recipesList) {
+            super(context, resource, recipesList);
+
+            recipeModelList = recipesList;
+            this.resource= resource;
+            inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            RecyclerView.ViewHolder viewHolder = null;
+
+            convertView = inflater.inflate(resource, null);
+
+            tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
+            tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
+            tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
+            tvRecipeSourceIcon = (TextView) convertView.findViewById(R.id.tvRecipeSourceIcon);
+            tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
+            // ivRecipeImage = (ImageView) customView.findViewById(R.id.recipe_image);
+            // tvRecipeDietLabel = (TextView) customView.findViewById(R.id.tvRecipeDietLabel);
+            // rbRecipeRating =(RatingBar) customView.findViewById(R.id.rbRecipeRating);
+            // tvRecipeIngredients = (TextView) customView.findViewById(R.id.tvRecipeIngredients);
+
+            tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
+            tvRecipeUri.setText(recipeModelList.get(position).getUri());
+            tvRecipeSource.setText(recipeModelList.get(position).getSource());
+            tvRecipeSourceIcon.setText(recipeModelList.get(position).getSourceIcon());
+            tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
+
+            return convertView;
         }
     }
 
@@ -302,7 +316,13 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
+        if (id == R.id.action_refresh) {
+            //new FetchRecipeTask().execute("https://www.edamam.com/search?q=beef&from=0&to=2&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+            updateRecipes();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
-
 }

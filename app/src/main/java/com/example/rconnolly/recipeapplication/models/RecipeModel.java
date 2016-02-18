@@ -1,11 +1,11 @@
 package com.example.rconnolly.recipeapplication.models;
 
-import java.util.List;
-
 /**
  * Created by rconnolly on 2/17/2016.
  */
 public class RecipeModel {
+
+    public RecipeModel(){}
 
     private String uri;
     private String label;
@@ -13,7 +13,7 @@ public class RecipeModel {
     private String source;
     private String sourceIcon;
     private String url;
-    private String[] ingredientLines;
+    //private String[] ingredientLines;
 
     public String getUri() {
         return uri;
@@ -63,11 +63,11 @@ public class RecipeModel {
         this.url = url;
     }
 
-    public String[] getIngredientLines() {
-        return ingredientLines;
-    }
-
-    public void setIngredientLines(String[] ingredientLines) {
-        this.ingredientLines = ingredientLines;
-    }
+//    public String[] getIngredientLines() {
+//        return ingredientLines;
+//    }
+//
+//    public void setIngredientLines(String[] ingredientLines) {
+//        this.ingredientLines = ingredientLines;
+//    }
 }
