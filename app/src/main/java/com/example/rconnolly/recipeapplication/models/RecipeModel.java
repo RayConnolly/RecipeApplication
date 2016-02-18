@@ -5,8 +5,6 @@ package com.example.rconnolly.recipeapplication.models;
  */
 public class RecipeModel {
 
-    public RecipeModel(){}
-
     private String uri;
     private String label;
     private String image;
@@ -14,6 +12,16 @@ public class RecipeModel {
     private String sourceIcon;
     private String url;
     //private String[] ingredientLines;
+
+    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url){
+
+        this.setUri(uri);
+        this.setLabel(label);
+        this.setImage(image);
+        this.setSource(source);
+        this.setSourceIcon(sourceIcon);
+        this.setUrl(url);
+    }
 
     public String getUri() {
         return uri;

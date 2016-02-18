@@ -34,7 +34,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //private ArrayAdapter<String> mRecipeAdapter;
-    private RecipeAdapter recipeAdapter;
+    private FetchRecipeTask.RecipeAdapter recipeAdapter;
     private List<RecipeModel> recipes;
 
     private ListView lvRecipes;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lvRecipes = (ListView)findViewById(R.id.main_activity_list);
+        lvRecipes = (ListView) findViewById(R.id.main_activity_list);
         updateRecipes();
 //        setHasOptionsMenu(true);
 
@@ -207,35 +207,46 @@ public class MainActivity extends AppCompatActivity {
             JSONObject parentObject = new JSONObject(recipeStr);
             JSONArray hitsArray = parentObject.getJSONArray("hits");
 
-            //RecipeModel recipeModel = new RecipeModel();
+            RecipeModel recipeModel = null;
             List<RecipeModel> recipeModelList = new ArrayList<>();
 
-            Gson gson = new Gson();
+            //Gson gson = new Gson();
+
 
             StringBuffer finalBufferedData = new StringBuffer();
-
+//            String[] resultStrs = new String[];
             for (int i = 0; i < hitsArray.length(); i++) {
 
                 JSONObject recipeObject = hitsArray.getJSONObject(i);
-                RecipeModel recipeModel = gson.fromJson(recipeObject.toString(), RecipeModel.class);
+                //RecipeModel recipeModel = gson.fromJson(recipeObject.toString(), RecipeModel.class);
 
-//                for (int j = 0; j < recipeObject.length(); j++) {
-//
-//                    String uri = recipeObject.getString("uri");
-//                    String label = recipeObject.getString("label");
-//                    String image = recipeObject.getString("image");
-//                    String source = recipeObject.getString("source");
-//                    String sourceIcon = recipeObject.getString("sourceIcon");
-//                    String url = recipeObject.getString("url");
-//                    //String ingredientLines = recipeObject.getString("ingredientLines");
-//                }
+                for (int j = 0; j < recipeObject.length(); j++) {
+
+                    String uri = recipeObject.getString("uri");
+                    String label = recipeObject.getString("label");
+                    String image = recipeObject.getString("image");
+                    String source = recipeObject.getString("source");
+                    String sourceIcon = recipeObject.getString("sourceIcon");
+                    String url = recipeObject.getString("url");
+                    //String ingredientLines = recipeObject.getString("ingredientLines");
+
+                    //resultStrs[j] = uri + "\n" + label + "\n" + image + "\n" + source + "\n" + sourceIcon + "\n" + url;
+                    recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url);
+                }
                 recipeModelList.add(recipeModel);
+
+//                for (String s : resultStrs) {
+//                    Log.v(LOG_TAG, "Forecast entry: " + s);
+//            }
+//            return recipeModelList;
+
+
             }
             return recipeModelList;
         }
 
-        @Override
-        protected void onPostExecute(List<RecipeModel> result) {
+            @Override
+            protected void onPostExecute (List < RecipeModel > result) {
 
 //            if (result != null) {
 //                recipeAdapter.clear();
@@ -244,62 +255,63 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //
 //            }
-            recipeAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
-            lvRecipes = (ListView) findViewById(R.id.main_activity_list);
+                recipeAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
+                lvRecipes = (ListView) findViewById(R.id.main_activity_list);
 
-            lvRecipes.setAdapter(recipeAdapter);
-        }
-    }
+                lvRecipes.setAdapter(recipeAdapter);
+            }
 
-    public class RecipeAdapter extends ArrayAdapter {
 
-        private List<RecipeModel> recipeModelList;
-        private int resource;
-        private LayoutInflater inflater;
+            public class RecipeAdapter extends ArrayAdapter {
 
-        private TextView tvRecipeUri;
-        private TextView tvRecipeLabel;
-        private TextView tvRecipeSource;
-        private TextView tvRecipeSourceIcon;
-        private TextView tvRecipeUrl;
-        // private ImageView ivRecipeImage;
-        // private TextView tvRecipeDietLabel;
-        // private RatingBar rbRecipeRating;
-        // private TextView tvRecipeIngredients;
+                private List<RecipeModel> recipeModelList;
+                private int resource;
+                private LayoutInflater inflater;
 
-        public RecipeAdapter(Context context, int resource, List<RecipeModel> recipesList) {
-            super(context, resource, recipesList);
+                private TextView tvRecipeUri;
+                private TextView tvRecipeLabel;
+                private TextView tvRecipeSource;
+                private TextView tvRecipeSourceIcon;
+                private TextView tvRecipeUrl;
+                // private ImageView ivRecipeImage;
+                // private TextView tvRecipeDietLabel;
+                // private RatingBar rbRecipeRating;
+                // private TextView tvRecipeIngredients;
 
-            recipeModelList = recipesList;
-            this.resource= resource;
-            inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        }
+                public RecipeAdapter(Context context, int resource, List<RecipeModel> recipesList) {
+                    super(context, resource, recipesList);
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+                    recipeModelList = recipesList;
+                    this.resource = resource;
+                    inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                }
 
-            RecyclerView.ViewHolder viewHolder = null;
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
 
-            convertView = inflater.inflate(resource, null);
+                    RecyclerView.ViewHolder viewHolder = null;
 
-            tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
-            tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
-            tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
-            tvRecipeSourceIcon = (TextView) convertView.findViewById(R.id.tvRecipeSourceIcon);
-            tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
-            // ivRecipeImage = (ImageView) customView.findViewById(R.id.recipe_image);
-            // tvRecipeDietLabel = (TextView) customView.findViewById(R.id.tvRecipeDietLabel);
-            // rbRecipeRating =(RatingBar) customView.findViewById(R.id.rbRecipeRating);
-            // tvRecipeIngredients = (TextView) customView.findViewById(R.id.tvRecipeIngredients);
+                    convertView = inflater.inflate(resource, null);
 
-            tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
-            tvRecipeUri.setText(recipeModelList.get(position).getUri());
-            tvRecipeSource.setText(recipeModelList.get(position).getSource());
-            tvRecipeSourceIcon.setText(recipeModelList.get(position).getSourceIcon());
-            tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
+                    tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
+                    tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
+                    tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
+                    tvRecipeSourceIcon = (TextView) convertView.findViewById(R.id.tvRecipeSourceIcon);
+                    tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
+                    // ivRecipeImage = (ImageView) customView.findViewById(R.id.recipe_image);
+                    // tvRecipeDietLabel = (TextView) customView.findViewById(R.id.tvRecipeDietLabel);
+                    // rbRecipeRating =(RatingBar) customView.findViewById(R.id.rbRecipeRating);
+                    // tvRecipeIngredients = (TextView) customView.findViewById(R.id.tvRecipeIngredients);
 
-            return convertView;
-        }
+                    tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
+                    tvRecipeUri.setText(recipeModelList.get(position).getUri());
+                    tvRecipeSource.setText(recipeModelList.get(position).getSource());
+                    tvRecipeSourceIcon.setText(recipeModelList.get(position).getSourceIcon());
+                    tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
+
+                    return convertView;
+                }
+            }
     }
 
     @Override
