@@ -1,6 +1,7 @@
 package com.example.rconnolly.recipeapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create default options which will be used for every
+        //  displayImage(...) call if no options will be passed to this method
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+        .cacheInMemory(true)
+        .cacheOnDisk(true)
+        .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        .defaultDisplayImageOptions(defaultOptions)
+        .build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
 
         lvRecipes = (ListView) findViewById(R.id.main_activity_list);
         updateRecipes();
@@ -90,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateRecipes() {
         FetchRecipeTask recipeTask = new FetchRecipeTask();
-        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=2&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
     }
 
     public class FetchRecipeTask extends AsyncTask<String, String, List<RecipeModel>> {
@@ -290,9 +309,10 @@ public class MainActivity extends AppCompatActivity {
             private TextView tvRecipeUri;
             private TextView tvRecipeLabel;
             private TextView tvRecipeSource;
-            private TextView tvRecipeSourceIcon;
+            private ImageView ivRecipeSourceIcon;
             private TextView tvRecipeUrl;
-            // private ImageView ivRecipeImage;
+            private ImageView ivRecipeImage;
+
             // private TextView tvRecipeDietLabel;
             // private RatingBar rbRecipeRating;
             // private TextView tvRecipeIngredients;
@@ -315,17 +335,43 @@ public class MainActivity extends AppCompatActivity {
                 tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
                 tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
                 tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
-                tvRecipeSourceIcon = (TextView) convertView.findViewById(R.id.tvRecipeSourceIcon);
+                ivRecipeSourceIcon = (ImageView) convertView.findViewById(R.id.ivRecipeSourceIcon);
                 tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
-                // ivRecipeImage = (ImageView) customView.findViewById(R.id.recipe_image);
-                // tvRecipeDietLabel = (TextView) customView.findViewById(R.id.tvRecipeDietLabel);
-                // rbRecipeRating =(RatingBar) customView.findViewById(R.id.rbRecipeRating);
-                // tvRecipeIngredients = (TextView) customView.findViewById(R.id.tvRecipeIngredients);
+                ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
+                final ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+                // tvRecipeDietLabel = (TextView) convertView.findViewById(R.id.tvRecipeDietLabel);
+                // rbRecipeRating =(RatingBar) convertView.findViewById(R.id.rbRecipeRating);
+                // tvRecipeIngredients = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
+
+                ImageLoader.getInstance().displayImage(recipeModelList.get(position).getImage(), ivRecipeImage, new ImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String imageUri, View view) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+
 
                 tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
-                tvRecipeUri.setText(recipeModelList.get(position).getUri());
+
+                ImageLoader.getInstance().displayImage(recipeModelList.get(position).getSourceIcon(), ivRecipeSourceIcon);
                 tvRecipeSource.setText(recipeModelList.get(position).getSource());
-                tvRecipeSourceIcon.setText(recipeModelList.get(position).getSourceIcon());
+                tvRecipeUri.setText("Uri: " + recipeModelList.get(position).getUri());
+
                 tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
 
                 return convertView;
