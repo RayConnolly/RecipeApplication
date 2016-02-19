@@ -14,4 +14,5 @@
     <string name="ingredients">Ingredients</string>
     <string name="recipe_uri">Recipe Uri</string>
     <string name="recipe_url">Recipe Url</string>
+    <string name="title_activity_image_category">ImageCategoryActivity</string>
 </resources>

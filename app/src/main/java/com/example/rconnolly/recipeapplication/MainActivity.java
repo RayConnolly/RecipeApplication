@@ -1,30 +1,17 @@
 package com.example.rconnolly.recipeapplication;
 
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FetchRecipeTask.RecipeAdapter recipeAdapter;
+    private RecipeListAdapter recipeAdapter;
     private List<RecipeModel> recipes;
     private ListView lvRecipes;
 
@@ -50,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create default options which will be used for every
-        //  displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
         .cacheInMemory(true)
         .cacheOnDisk(true)
@@ -59,65 +44,26 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
         .defaultDisplayImageOptions(defaultOptions)
         .build();
-        ImageLoader.getInstance().init(config); // Do it on Application start
-
-        lvRecipes = (ListView) findViewById(R.id.main_activity_list);
-        updateRecipes();
-
-//        final String[] recipes = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortillas", "Fillet Steak"};
-//        final String[] recipeDescriptions = {"Chicken Carbonara", "Chicken Tikka Masala", "Chicken Korma", "Lasagne", "Pizza", "Beef Tortilla", "Fillet Steak"};
-//        final Integer[] recipesImages = {R.drawable.chicken_carbonarra, R.drawable.chicken_tikka, R.drawable.chicken_korma, R.drawable.lasagne, R.drawable.pizza, R.drawable.tortillas, R.drawable.fillet_steak};
-
-//        ListAdapter mAdapter = new CustomListAdapter(this, recipesImages, recipes, recipeDescriptions);
-//        ListView mList = (ListView) findViewById(R.id.main_activity_list);
-//
-//        mList.setAdapter(mAdapter);
-
-//        ListAdapter mAdapter = new RecipeAdapter(this, recipes2);
-//        ListView mList = (ListView) findViewById(R.id.main_activity_list);
-//
-//        mList.setAdapter(mAdapter);
-//
-//        mList.setOnItemClickListener(
-//                new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                        String selectedRecipe = recipes[+position];
-//                        String selectedRecipeDesc = recipeDescriptions[+position];
-//                        //Integer selectedRecipeImage = recipesImages[+ position];
-//
-//                        // BitmapDrawable selectedImage = (BitmapDrawable) recipesImages[+ position];
-//                        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), selectedRecipeImage);
-//
-//                        Intent intent = new Intent(MainActivity.this, RecipeDetailActivity.class);
-//                        intent.putExtra("name", selectedRecipe);
-//                        intent.putExtra("desc", selectedRecipeDesc);
-//                        //intent.putExtra("bitmap", bitmap);
-//
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
+        ImageLoader.getInstance().init(config);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
+        updateRecipes();
     }
 
     private void updateRecipes() {
         FetchRecipeTask recipeTask = new FetchRecipeTask();
-        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=10&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
     }
 
     public class FetchRecipeTask extends AsyncTask<String, String, List<RecipeModel>> {
 
         private final String LOG_TAG = FetchRecipeTask.class.getSimpleName();
 
-//        public FetchRecipeTask() {
-//        }
+        public FetchRecipeTask() {
+        }
 
         @Override
         protected void onPreExecute() {
@@ -140,31 +86,7 @@ public class MainActivity extends AppCompatActivity {
             int to = 3;
 
             try {
-                //String tempUrl = "https://www.edamam.com/search?q=beef&from=0&to=10&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}";
-//                final String RECIPE_BASE_URL = "https://www.edamam.com/search?";
-                final String RECIPE_BASE_URL = "https://www.edamam.com/search?q=beef&from=0&to=2&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}";
-
-                final String QUERY_PARAM = "q";
-                //final String RECIPES_PARAM = "count";
-                final String RECIPES_FROM = "from";
-                final String RECIPES_TO = "to";
-                //final String APPID_ID = "app_id";
-                final String APP_KEY = "app_key";
-
-//                 Uri builtUri = Uri.parse(RECIPE_BASE_URL).buildUpon()
-//                        .appendQueryParameter(QUERY_PARAM, params[0])
-//                        .appendQueryParameter(RECIPES_FROM, Integer.toString(from))
-//                        .appendQueryParameter(RECIPES_TO, Integer.toString(to))
-//                        .appendQueryParameter(APP_KEY, BuildConfig.RECIPE_API_KEY)
-//                        .build();
-//
-//                URL url = new URL(builtUri.toString());
-
-//                Log.v(LOG_TAG, "Built URI: " + builtUri.toString());
-
                 URL url = new URL(params[0]);
-
-                //URL url = new URL(RECIPE_BASE_URL);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -246,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 String source = null;
                 String sourceIcon = null;
                 String url = null;
-                //String[] ingredientLines = null;
 
                 if(recipeObject.has("uri")) {
                     if (!recipeObject.isNull("uri")) {
@@ -278,11 +199,6 @@ public class MainActivity extends AppCompatActivity {
                         url = recipeObject.getString("url");
                     }
                 }
-//                if(recipeObject.has("ingredientLines")) {
-//                    if (!recipeObject.isNull("ingredientLines")) {
-//                        ingredientLines = recipeObject.getString("ingredientLines");
-//                    }
-//                }
 
                 recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url);
                 recipeModelList.add(recipeModel);
@@ -293,113 +209,34 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute (List < RecipeModel > result) {
 
-            recipeAdapter = new RecipeAdapter(getApplicationContext(), R.layout.list_row_temp, result);
+            recipeAdapter = new RecipeListAdapter(getApplicationContext(), R.layout.list_recipe_category_row, result);
             lvRecipes = (ListView) findViewById(R.id.main_activity_list);
 
             lvRecipes.setAdapter(recipeAdapter);
         }
-
-
-        public class RecipeAdapter extends ArrayAdapter {
-
-            private List<RecipeModel> recipeModelList;
-            private int resource;
-            private LayoutInflater inflater;
-
-            private TextView tvRecipeUri;
-            private TextView tvRecipeLabel;
-            private TextView tvRecipeSource;
-            private ImageView ivRecipeSourceIcon;
-            private TextView tvRecipeUrl;
-            private ImageView ivRecipeImage;
-
-            // private TextView tvRecipeDietLabel;
-            // private RatingBar rbRecipeRating;
-            // private TextView tvRecipeIngredients;
-
-            public RecipeAdapter(Context context, int resource, List<RecipeModel> recipesList) {
-                super(context, resource, recipesList);
-
-                recipeModelList = recipesList;
-                this.resource = resource;
-                inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-
-                RecyclerView.ViewHolder viewHolder = null;
-
-                convertView = inflater.inflate(resource, null);
-
-                tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
-                tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
-                tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
-                ivRecipeSourceIcon = (ImageView) convertView.findViewById(R.id.ivRecipeSourceIcon);
-                tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
-                ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
-                final ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-                // tvRecipeDietLabel = (TextView) convertView.findViewById(R.id.tvRecipeDietLabel);
-                // rbRecipeRating =(RatingBar) convertView.findViewById(R.id.rbRecipeRating);
-                // tvRecipeIngredients = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
-
-                ImageLoader.getInstance().displayImage(recipeModelList.get(position).getImage(), ivRecipeImage, new ImageLoadingListener() {
-                    @Override
-                    public void onLoadingStarted(String imageUri, View view) {
-                        progressBar.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onLoadingCancelled(String imageUri, View view) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
-
-
-                tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
-
-                ImageLoader.getInstance().displayImage(recipeModelList.get(position).getSourceIcon(), ivRecipeSourceIcon);
-                tvRecipeSource.setText(recipeModelList.get(position).getSource());
-                tvRecipeUri.setText("Uri: " + recipeModelList.get(position).getUri());
-
-                tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
-
-                return convertView;
-            }
-        }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
             return true;
         }
 
-        if (id == R.id.action_refresh) {
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
 
-            updateRecipes();
-            return true;
+            int id = item.getItemId();
+
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            if (id == R.id.action_refresh) {
+
+                updateRecipes();
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
