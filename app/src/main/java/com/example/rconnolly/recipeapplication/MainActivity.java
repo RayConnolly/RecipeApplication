@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateRecipes() {
         FetchRecipeTask recipeTask = new FetchRecipeTask();
-        recipeTask.execute("https://www.edamam.com/search?q=beef&from=0&to=10&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+        recipeTask.execute("https://www.edamam.com/search?q=chicken&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
     }
 
     public class FetchRecipeTask extends AsyncTask<String, String, List<RecipeModel>> {

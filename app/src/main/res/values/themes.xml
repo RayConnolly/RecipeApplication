@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Recipe App custom theme. -->
+    <style name="MyCustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <item name="android:textColorPrimary">#0F0F0F</item>
+        <!--<item name="android:windowBackground">@color/myCustomColor</item>-->
+    </style>
+
+</resources>
