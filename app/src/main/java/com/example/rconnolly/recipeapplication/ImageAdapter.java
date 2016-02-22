@@ -70,14 +70,14 @@ public class ImageAdapter extends BaseAdapter {
 
         viewHolder.imgBtn.setTag(result[position].toString());
 
-        final ImageButton imgBtn = viewHolder.imgBtn;
+        final String imgBtnVal = viewHolder.imgBtn.getTag().toString().toLowerCase();
 
         viewHolder.imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
-                intent.putExtra("searchVal", imgBtn.getTag().toString().toLowerCase());
+                intent.putExtra("searchVal", imgBtnVal);
                 context.startActivity(intent);
 
 //                Toast.makeText(context, "You clicked on: " + imgBtn.getTag().toString().toLowerCase(), Toast.LENGTH_SHORT).show();
