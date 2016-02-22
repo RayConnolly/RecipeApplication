@@ -27,12 +27,13 @@ public class RecipeListAdapter extends ArrayAdapter {
     private int resource;
     private LayoutInflater inflater;
 
-    private TextView tvRecipeUri;
-    private TextView tvRecipeLabel;
-    private TextView tvRecipeSource;
-    private ImageView ivRecipeSourceIcon;
-    private TextView tvRecipeUrl;
-    private ImageView ivRecipeImage;
+//    private TextView tvRecipeUri;
+//    private TextView tvRecipeLabel;
+//    private TextView tvRecipeSource;
+//    private ImageView ivRecipeSourceIcon;
+//    private TextView tvRecipeUrl;
+//    private ImageView ivRecipeImage;
+//    private ProgressBar progressBar;
 
     public RecipeListAdapter(Context context, int resource, List<RecipeModel> recipesList) {
         super(context, resource, recipesList);
@@ -44,21 +45,31 @@ public class RecipeListAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO - Add ViewHolder here
-        //RecyclerView.ViewHolder viewHolder = null;
 
-        convertView = inflater.inflate(resource, null);
+        ViewHolder viewHolder = null;
 
-        tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
-        tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
-        tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
-        ivRecipeSourceIcon = (ImageView) convertView.findViewById(R.id.ivRecipeSourceIcon);
-        tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
-        tvRecipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
-        ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
+        if (convertView == null) {
+
+            viewHolder = new ViewHolder();
+
+            convertView = inflater.inflate(resource, null);
+
+            viewHolder.tvRecipeLabel = (TextView) convertView.findViewById(R.id.tvRecipeLabel);
+            viewHolder.tvRecipeUri = (TextView) convertView.findViewById(R.id.tvRecipeUri);
+            viewHolder.tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
+            viewHolder.ivRecipeSourceIcon = (ImageView) convertView.findViewById(R.id.ivRecipeSourceIcon);
+            viewHolder.tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
+            viewHolder.tvRecipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
+            viewHolder.ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
         final ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 
-        ImageLoader.getInstance().displayImage(recipeModelList.get(position).getImage(), ivRecipeImage, new ImageLoadingListener() {
+        ImageLoader.getInstance().displayImage(recipeModelList.get(position).getImage(), viewHolder.ivRecipeImage, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -81,16 +92,27 @@ public class RecipeListAdapter extends ArrayAdapter {
         });
 
         // Recipe Label
-        tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
+        viewHolder.tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
 
         // Recipe Source Specific fields
-        ImageLoader.getInstance().displayImage(recipeModelList.get(position).getSourceIcon(), ivRecipeSourceIcon);
-        tvRecipeSource.setText(recipeModelList.get(position).getSource());
-        tvRecipeUri.setText("Uri: " + recipeModelList.get(position).getUri());
+        ImageLoader.getInstance().displayImage(recipeModelList.get(position).getSourceIcon(), viewHolder.ivRecipeSourceIcon);
+        viewHolder.tvRecipeSource.setText(recipeModelList.get(position).getSource());
+        viewHolder.tvRecipeUri.setText("Uri: " + recipeModelList.get(position).getUri());
 
         // Recipe Url
-        tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
+        viewHolder.tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
 
         return convertView;
     }
+
+    class ViewHolder {
+
+        private TextView tvRecipeUri;
+        private TextView tvRecipeLabel;
+        private TextView tvRecipeSource;
+        private ImageView ivRecipeSourceIcon;
+        private TextView tvRecipeUrl;
+        private ImageView ivRecipeImage;
+    }
+
 }

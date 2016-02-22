@@ -101,7 +101,7 @@ public class TestGridviewActivity extends AppCompatActivity{
 
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-                convertView= inflater.inflate(R.layout.test_gridview_activity, null);
+                convertView= inflater.inflate(R.layout.test_gridview_activity, parent, false);
                 //view = getLayoutInflater().inflate(R.layout.test_gridview_activity, parent, false);
             }
 
