@@ -27,14 +27,6 @@ public class RecipeListAdapter extends ArrayAdapter {
     private int resource;
     private LayoutInflater inflater;
 
-//    private TextView tvRecipeUri;
-//    private TextView tvRecipeLabel;
-//    private TextView tvRecipeSource;
-//    private ImageView ivRecipeSourceIcon;
-//    private TextView tvRecipeUrl;
-//    private ImageView ivRecipeImage;
-//    private ProgressBar progressBar;
-
     public RecipeListAdapter(Context context, int resource, List<RecipeModel> recipesList) {
         super(context, resource, recipesList);
 
