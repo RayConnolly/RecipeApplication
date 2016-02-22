@@ -13,14 +13,14 @@ import android.widget.Toast;
 /**
  * Created by rconnolly on 2/22/2016.
  */
-public class ImageAdapter extends BaseAdapter {
+public class ImageGridviewAdapter extends BaseAdapter {
 
     Context context;
     String[] result;
     Integer[] images;
     private static LayoutInflater inflater = null;
 
-    public ImageAdapter(Context context, String[] imageNames, Integer[] images){
+    public ImageGridviewAdapter(Context context, String[] imageNames, Integer[] images){
         this.context = context;
         this.result = imageNames;
         this.images = images;

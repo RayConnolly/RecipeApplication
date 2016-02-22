@@ -13,7 +13,12 @@ public class HomeActivity extends AppCompatActivity{
 
     GridView gridView;
     public static String[] imageNames = {"Chicken", "Beef", "Lamb", "Pork", "Seafood", "Vegetarian"};
-    public static Integer[] images = {R.drawable.chicken, R.drawable.beef, R.drawable.lamb, R.drawable.pork, R.drawable.seafood, R.drawable.vegetarian};
+    public static Integer[] images = {R.drawable.chicken,
+                                      R.drawable.beef,
+                                      R.drawable.lamb,
+                                      R.drawable.pork,
+                                      R.drawable.seafood,
+                                      R.drawable.vegetarian};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +28,8 @@ public class HomeActivity extends AppCompatActivity{
         ImageView titleImg = (ImageView)findViewById(R.id.appTitleImg);
         titleImg.setImageResource(R.drawable.app_title_image);
 
-         gridView = (GridView)findViewById(R.id.gridView);
-         gridView.setAdapter(new ImageAdapter(this, imageNames, images));
+        gridView = (GridView)findViewById(R.id.gridView);
+        gridView.setAdapter(new ImageGridviewAdapter(this, imageNames, images));
     }
 
     @Override
