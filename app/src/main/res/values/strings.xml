@@ -16,4 +16,5 @@
     <string name="recipe_url">Recipe Url</string>
     <string name="title_activity_image_category">ImageCategoryActivity</string>
     <string name="source_info_label">Source Information</string>
+    <string name="home_page_title">What\'s For Dinner?</string>
 </resources>

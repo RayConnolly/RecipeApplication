@@ -1,5 +1,6 @@
 package com.example.rconnolly.recipeapplication;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +55,19 @@ public class MainActivity extends AppCompatActivity {
         updateRecipes();
     }
 
-    private void updateRecipes() {
+    private void updateRecipes(String... params) {
         FetchRecipeTask recipeTask = new FetchRecipeTask();
-        recipeTask.execute("https://www.edamam.com/search?q=chicken&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+
+        Bundle bundle = getIntent().getExtras();
+        String searchValue = null;
+
+        if (bundle != null) {
+
+            searchValue = bundle.getString("searchVal");
+        }
+
+        //recipeTask.execute("https://www.edamam.com/search?q=chicken&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
+        recipeTask.execute(searchValue);
     }
 
     public class FetchRecipeTask extends AsyncTask<String, String, List<RecipeModel>> {
@@ -76,17 +88,34 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
 
+            URL url = null;
+
+            final int from = 0;
+            final int to = 10;
+            final String appKey = "${f0a3e23184a690b536f959d16568b22ae578bb6f}";
+
+            final String FORECAST_BASE_URL = "https://www.edamam.com/search?";
+            final String QUERY_PARAM = "q";
+            final String FROM_PARAM = "from";
+            final String TO_PARAM = "to";
+            final String APP_KEY_PARAM = "app_key";
+
+            Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
+                .appendQueryParameter(QUERY_PARAM, params[0])
+                .appendQueryParameter(FROM_PARAM, Integer.toString(from))
+                .appendQueryParameter(TO_PARAM, Integer.toString(to))
+                .appendQueryParameter(APP_KEY_PARAM, appKey)
+            .build();
+
+            Log.v(LOG_TAG, "Built URI " + builtUri.toString());
+
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
             String recipeStr = null;
 
-            String format = "json";
-            int from = 0;
-            int to = 3;
-
             try {
-                URL url = new URL(params[0]);
+                url = new URL(builtUri.toString());
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");

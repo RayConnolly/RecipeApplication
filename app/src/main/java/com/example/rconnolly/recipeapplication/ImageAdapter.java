@@ -1,6 +1,7 @@
 package com.example.rconnolly.recipeapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
         ViewHolder viewHolder = null;
 
@@ -67,10 +68,19 @@ public class ImageAdapter extends BaseAdapter {
         viewHolder.imgBtn.setImageResource(images[position]);
         viewHolder.textVw.setText(result[position]);
 
+        viewHolder.imgBtn.setTag(result[position].toString());
+
+        final ImageButton imgBtn = viewHolder.imgBtn;
+
         viewHolder.imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You clicked on: " + images[position].toString(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                intent.putExtra("searchVal", imgBtn.getTag().toString().toLowerCase());
+                context.startActivity(intent);
+
+//                Toast.makeText(context, "You clicked on: " + imgBtn.getTag().toString().toLowerCase(), Toast.LENGTH_SHORT).show();
             }
         });
 
