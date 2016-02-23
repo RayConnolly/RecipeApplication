@@ -13,6 +13,7 @@
         <!--android:id="@+id/toolbar" />-->
 
     <ListView
+        style="@style/MyCustomStyle"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/main_activity_list"

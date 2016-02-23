@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by rconnolly on 2/22/2016.
@@ -79,8 +78,6 @@ public class ImageGridviewAdapter extends BaseAdapter {
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 intent.putExtra("searchVal", imgBtnVal);
                 context.startActivity(intent);
-
-//                Toast.makeText(context, "You clicked on: " + imgBtn.getTag().toString().toLowerCase(), Toast.LENGTH_SHORT).show();
             }
         });
 
