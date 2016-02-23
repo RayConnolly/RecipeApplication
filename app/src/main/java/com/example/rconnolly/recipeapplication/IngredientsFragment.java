@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 /**
  * Created by rconnolly on 2/16/2016.
  */
-public class RecipeFragment extends Fragment {
+public class IngredientsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.recipe_fragment, container, false);
+        return inflater.inflate(R.layout.ingredients_fragment, container, false);
     }
 }

@@ -38,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TEMP CODE
+//        WebView webView = (WebView)findViewById(R.id.webView);
+//
+//        webView.getSettings().setLoadsImagesAutomatically(true);
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.getSettings().setSupportZoom(true);
+//        webView.getSettings().setBuiltInZoomControls(true);
+
+        //webView.loadUrl();
+
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
         .cacheInMemory(true)
         .cacheOnDisk(true)

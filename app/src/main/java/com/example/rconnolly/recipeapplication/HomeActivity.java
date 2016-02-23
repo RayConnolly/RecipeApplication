@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity{
                                       R.drawable.pork,
                                       R.drawable.seafood,
                                       R.drawable.vegetarian};
+    // TODO - Add new images to match 'imageNames' array values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
