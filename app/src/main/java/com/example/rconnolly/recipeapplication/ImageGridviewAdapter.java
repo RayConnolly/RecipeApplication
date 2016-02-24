@@ -1,12 +1,11 @@
 package com.example.rconnolly.recipeapplication;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -41,7 +40,7 @@ public class ImageGridviewAdapter extends BaseAdapter {
 
     class ViewHolder {
 
-        private ImageButton imgBtn;
+        private ImageView imageVw;
         private TextView textVw;
     }
 
@@ -56,30 +55,30 @@ public class ImageGridviewAdapter extends BaseAdapter {
 
             convertView = inflater.inflate(R.layout.recipe_list, parent, false);
 
-            viewHolder.imgBtn = (ImageButton) convertView.findViewById(R.id.imgBtn);
-            viewHolder.textVw = (TextView) convertView.findViewById(R.id.textVw);
+            viewHolder.imageVw = (ImageView) convertView.findViewById(R.id.imgView);
+            viewHolder.textVw = (TextView) convertView.findViewById(R.id.txtView);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.imgBtn.setImageResource(images[position]);
+        viewHolder.imageVw.setImageResource(images[position]);
         viewHolder.textVw.setText(result[position]);
 
-        viewHolder.imgBtn.setTag(result[position].toString());
-
-        final String imgBtnVal = viewHolder.imgBtn.getTag().toString().toLowerCase();
-
-        viewHolder.imgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                intent.putExtra("searchVal", imgBtnVal);
-                context.startActivity(intent);
-            }
-        });
+//        viewHolder.imgBtn.setTag(result[position].toString());
+//
+//        final String imgBtnVal = viewHolder.imgBtn.getTag().toString().toLowerCase();
+//
+//        viewHolder.imgBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(v.getContext(), MainActivity.class);
+//                intent.putExtra("searchVal", imgBtnVal);
+//                context.startActivity(intent);
+//            }
+//        });
 
         return convertView;
     }

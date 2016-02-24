@@ -47,7 +47,7 @@
         <activity
             android:name=".RecipeDetailActivity"
             android:label="@string/home_activity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/MyCustomTheme"></activity>
 
     </application>
 

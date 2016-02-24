@@ -86,6 +86,8 @@ public class RecipeListAdapter extends ArrayAdapter {
             }
         });
 
+        viewHolder.ivRecipeImage.setTag(recipeModelList.get(position).getImage());
+
         // Recipe Label
         viewHolder.tvRecipeLabel.setText(recipeModelList.get(position).getLabel());
 

@@ -3,17 +3,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/imgBtn"
+        <ImageView
+            android:id="@+id/imgView"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:layout_weight="1"
-            android:padding="3dp" />
+            android:padding="3dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
 
         <TextView
-            android:id="@+id/textVw"
+            android:id="@+id/txtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="normal"

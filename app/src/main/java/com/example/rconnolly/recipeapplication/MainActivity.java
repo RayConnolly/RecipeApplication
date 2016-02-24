@@ -1,5 +1,6 @@
 package com.example.rconnolly.recipeapplication;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,7 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -49,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         //webView.loadUrl();
 
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-        .cacheInMemory(true)
-        .cacheOnDisk(true)
-        .build();
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-        .defaultDisplayImageOptions(defaultOptions)
-        .build();
+                .defaultDisplayImageOptions(defaultOptions)
+                .build();
         ImageLoader.getInstance().init(config);
     }
 
@@ -245,12 +250,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute (List <RecipeModel> result) {
+        protected void onPostExecute (final List <RecipeModel> result) {
 
             recipeAdapter = new RecipeListAdapter(getApplicationContext(), R.layout.list_recipe_category_row, result);
             lvRecipes = (ListView) findViewById(R.id.main_activity_list);
 
+//            lvRecipes.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+//            lvRecipes.setFocusable(false);
+//            lvRecipes.setFocusableInTouchMode(false);
+
             lvRecipes.setAdapter(recipeAdapter);
+
+            lvRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    ImageView ivRecipeImage = (ImageView) view.findViewById(R.id.ivRecipeImage);
+                    TextView tvRecipeLabel = (TextView) view.findViewById(R.id.tvRecipeLabel);
+                    TextView tvRecipeUri = (TextView) view.findViewById(R.id.tvRecipeUri);
+
+                    final String recipeImage = ivRecipeImage.getTag().toString();
+                    //final int recipeImgId = ivRecipeImage.getId();
+                    final String recipeLbl = tvRecipeLabel.getText().toString();
+                    final String recipeDesc = tvRecipeUri.getText().toString();
+
+//                    lvRecipes.setTag(tv.getText().toString());
+//
+//                    final String recipeLbl = lvRecipes.getTag().toString().toLowerCase();
+
+                    Intent intent = new Intent(view.getContext(), RecipeDetailActivity.class);
+
+                    intent.putExtra("recipeImg", recipeImage);
+                    intent.putExtra("recipeLbl", recipeLbl);
+                    intent.putExtra("recipeDesc", recipeDesc);
+
+                    startActivity(intent);
+
+
+//                    Toast.makeText(view.getContext(), "Stop clicking me!!!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
