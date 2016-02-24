@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
             searchValue = bundle.getString("searchVal");
         }
-
-        //recipeTask.execute("https://www.edamam.com/search?q=chicken&from=0&to=5&app_key=${f0a3e23184a690b536f959d16568b22ae578bb6f}");
         recipeTask.execute(searchValue);
     }
 
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
             final int from = 0;
             final int to = 10;
-            final String appKey = "${f0a3e23184a690b536f959d16568b22ae578bb6f}";
+            final String appKey = "${f0a3e23184a690b536f959d16568b22ae578bb6f}"; // TODO Put this in config files
 
             final String FORECAST_BASE_URL = "https://www.edamam.com/search?";
             final String QUERY_PARAM = "q";
@@ -254,11 +252,6 @@ public class MainActivity extends AppCompatActivity {
 
             recipeAdapter = new RecipeListAdapter(getApplicationContext(), R.layout.list_recipe_category_row, result);
             lvRecipes = (ListView) findViewById(R.id.main_activity_list);
-
-//            lvRecipes.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//            lvRecipes.setFocusable(false);
-//            lvRecipes.setFocusableInTouchMode(false);
-
             lvRecipes.setAdapter(recipeAdapter);
 
             lvRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -270,13 +263,8 @@ public class MainActivity extends AppCompatActivity {
                     TextView tvRecipeUri = (TextView) view.findViewById(R.id.tvRecipeUri);
 
                     final String recipeImage = ivRecipeImage.getTag().toString();
-                    //final int recipeImgId = ivRecipeImage.getId();
                     final String recipeLbl = tvRecipeLabel.getText().toString();
                     final String recipeDesc = tvRecipeUri.getText().toString();
-
-//                    lvRecipes.setTag(tv.getText().toString());
-//
-//                    final String recipeLbl = lvRecipes.getTag().toString().toLowerCase();
 
                     Intent intent = new Intent(view.getContext(), RecipeDetailActivity.class);
 
@@ -285,9 +273,6 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("recipeDesc", recipeDesc);
 
                     startActivity(intent);
-
-
-//                    Toast.makeText(view.getContext(), "Stop clicking me!!!", Toast.LENGTH_SHORT).show();
                 }
             });
         }

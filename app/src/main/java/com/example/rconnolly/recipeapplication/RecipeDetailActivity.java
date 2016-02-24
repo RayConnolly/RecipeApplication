@@ -27,6 +27,16 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
 
+        // Add Ingredients fragment
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment_title, new IngredientsFragment())
+//                    .add(R.id.fragment_image, new IngredientsFragment())
+//                    .add(R.id.fragment_text_block, new IngredientsFragment())
+//                    .commit();
+//        }
+
+        // Set up UIL options
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
@@ -37,6 +47,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 .build();
         ImageLoader.getInstance().init(config);
 
+        // Retrieve values from Recipes activity
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {

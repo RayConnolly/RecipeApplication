@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".RecipeDetailActivity"
-            android:label="@string/home_activity"
+            android:label="@string/recipe_detail"
             android:theme="@style/MyCustomTheme"></activity>
 
     </application>
