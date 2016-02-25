@@ -20,42 +20,35 @@ public class IngredientsFragment extends Fragment {
     private TextView tvDietLabels;
     private TextView tvHealthLabels;
 
+    private String recipeIngredients;
+    private String recipeDietLabels;
+    private String recipeHealthLabels;
+
     public IngredientsFragment(){}
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-
+        recipeIngredients = this.getArguments().getString("ingredients");
+        recipeDietLabels = this.getArguments().getString("dietLbls");
+        recipeHealthLabels = this.getArguments().getString("healthLbls");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        tvIngredients = (TextView) container.findViewById(R.id.tvRecipeIngredients);
-        tvDietLabels = (TextView) container.findViewById(R.id.tvRecipeDietLabels);
-        tvHealthLabels = (TextView) container.findViewById(R.id.tvRecipeHealthLabels);
+        View view = inflater.inflate(R.layout.ingredients_fragment, container, false);
 
-        String recipeIngredients = this.getArguments().getString("ingredients");
-        String recipeDietLabels = this.getArguments().getString("dietLbls");
-        String recipeHealthLabels = this.getArguments().getString("healthLbls");
-
-//        final String recipeIngredients = tvIngredientLines.getText().toString();
-//        final String recipeDietLabels = tvDietLabels.getText().toString();
-//        final String recipeHealthLabels = tvHealthLabels.getText().toString();
+        tvIngredients = (TextView) view.findViewById(R.id.txtRecipeIngredients);
+        tvDietLabels = (TextView) view.findViewById(R.id.txtRecipeDietLabels);
+        tvHealthLabels = (TextView) view.findViewById(R.id.txtRecipeHealthLabels);
 
         tvIngredients.setText(recipeIngredients);
         tvDietLabels.setText(recipeDietLabels);
         tvHealthLabels.setText(recipeHealthLabels);
 
-
-//        tvIngredientLines.setText(Arrays.toString(recipeModelList.get(position).getIngredientLines()).replaceAll("\\[|\\]", ""));
-//        tvDietLabels.setText(Arrays.toString(recipeModelList.get(position).getDietLabels()).replaceAll("\\[|\\]", ""));
-//        tvHealthLabels.setText(Arrays.toString(recipeModelList.get(position).getHealthLabels()).replaceAll("\\[|\\]", ""));
-
-        return inflater.inflate(R.layout.ingredients_fragment, container, false);
-
-
+        return view;
     }
 }

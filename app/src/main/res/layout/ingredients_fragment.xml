@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ingredients"
-            android:id="@+id/tvRecipeIngredients" />
+            android:id="@+id/txtRecipeIngredients" />
 
         <TextView
             android:textColor="@color/textColor"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/diet_labels"
-            android:id="@+id/tvRecipeDietLabels" />
+            android:id="@+id/txtRecipeDietLabels" />
 
         <TextView
             android:textColor="@color/textColor"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/health_labels"
-            android:id="@+id/tvRecipeHealthLabels" />
+            android:id="@+id/txtRecipeHealthLabels" />
 
     </LinearLayout>
 

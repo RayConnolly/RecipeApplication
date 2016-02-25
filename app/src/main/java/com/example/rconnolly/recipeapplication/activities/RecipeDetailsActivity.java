@@ -115,8 +115,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 bundle.putString("healthLbls", healthLbls);
 
                 IngredientsFragment ingredientsFragment = new IngredientsFragment();
-
                 ingredientsFragment.setArguments(bundle);
+
+//                Fragment fragment = null;
+//                if (v == findViewById(R.id.fragment_container)){
+//
+//                    fragment = new IngredientsFragment();
+//                }
+
+
 
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.fragment_container, ingredientsFragment)

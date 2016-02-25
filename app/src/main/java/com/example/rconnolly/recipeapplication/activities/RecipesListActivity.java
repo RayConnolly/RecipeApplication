@@ -322,9 +322,9 @@ public class RecipesListActivity extends AppCompatActivity {
                     final String recipeLbl = tvRecipeLabel.getText().toString();
                     final String recipeDesc = tvRecipeUri.getText().toString();
 
-                    final String[] recipeIngredients = tvIngredientLines.getContext().getResources().getStringArray(0);
-                    final String[] recipeDietLabels = tvDietLabels.getContext().getResources().getStringArray(0);
-                    final String[] recipeHealthLabels = tvHealthLabels.getContext().getResources().getStringArray(0);
+                    final String recipeIngredients = tvIngredientLines.getText().toString();
+                    final String recipeDietLabels = tvDietLabels.getText().toString();
+                    final String recipeHealthLabels = tvHealthLabels.getText().toString();
 
                     Intent recipeDetailsIntent = new Intent(view.getContext(), RecipeDetailsActivity.class);
 
