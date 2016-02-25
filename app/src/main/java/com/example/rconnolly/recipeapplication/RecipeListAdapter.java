@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
@@ -61,6 +62,7 @@ public class RecipeListAdapter extends ArrayAdapter {
             viewHolder.tvIngredientLines = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
             viewHolder.tvDietLabels = (TextView) convertView.findViewById(R.id.tvRecipeDietLabels);
             viewHolder.tvHealthLabels = (TextView) convertView.findViewById(R.id.tvRecipeHealthLabels);
+            viewHolder.ratingBar = (RatingBar)convertView.findViewById(R.id.rbRecipeRating);
 
             convertView.setTag(viewHolder);
         } else {
@@ -123,6 +125,8 @@ public class RecipeListAdapter extends ArrayAdapter {
         viewHolder.tvDietLabels.setText(Arrays.toString(recipeModelList.get(position).getDietLabels()).replaceAll("\\[|\\]", ""));
         viewHolder.tvHealthLabels.setText(Arrays.toString(recipeModelList.get(position).getHealthLabels()).replaceAll("\\[|\\]", ""));
 
+        viewHolder.ratingBar.setRating(2);
+
         return convertView;
     }
 
@@ -137,6 +141,7 @@ public class RecipeListAdapter extends ArrayAdapter {
         private TextView tvIngredientLines;
         private TextView tvDietLabels;
         private TextView tvHealthLabels;
+        private RatingBar ratingBar;
     }
 
 }

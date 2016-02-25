@@ -14,6 +14,7 @@ public class RecipeModel {
     private String[] ingredientLines;
     private String[] dietLabels;
     private String[] healthLabels;
+    private Float rating;
 
     public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines, String[] dietLabels, String[] healthLabels){
 
