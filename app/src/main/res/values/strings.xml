@@ -12,6 +12,7 @@
     <string name="source">Source</string>
     <string name="source_icon">Source Icon</string>
     <string name="diet_labels">Diet Labels</string>
+    <string name="health_labels">Health Labels</string>
     <string name="ingredients">Ingredients</string>
     <string name="recipe_uri">Recipe Uri</string>
     <string name="recipe_url">Recipe Url</string>
@@ -20,4 +21,7 @@
     <string name="home_page_title">What\'s For Dinner?</string>
     <string name="choose_food_type">Choose Food Type</string>
     <string name="my_favourite_recipes">My Favourites</string>
+    <string name="healthLabelsLbl">Health Labels</string>
+    <string name="dietLabelsLbl">Diet labels</string>
+    <string name="ingredientsLbl">Ingredients</string>
 </resources>

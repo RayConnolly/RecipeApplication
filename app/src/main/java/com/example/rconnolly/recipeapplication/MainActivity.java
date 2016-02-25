@@ -210,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
                 String sourceIcon = null;
                 String url = null;
                 JSONArray ingredientLines = null;
+                JSONArray dietLabels = null;
+                JSONArray healthLabels = null;
 
                 if(recipeObject.has("uri")) {
                     if (!recipeObject.isNull("uri")) {
@@ -248,6 +250,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+                if(recipeObject.has("dietLabels")) {
+                    if (!recipeObject.isNull("dietLabels")) {
+                        dietLabels = recipeObject.getJSONArray("dietLabels");
+                    }
+                }
+
+                if(recipeObject.has("healthLabels")) {
+                    if (!recipeObject.isNull("healthLabels")) {
+                        healthLabels = recipeObject.getJSONArray("healthLabels");
+                    }
+                }
+
                 //jsonObj = new JSONObject(response);
 //                jsonData = jsonObj.optJSONObject("data");
 //                JSONArray jsonArr= jsonObj.getJSONArray("numbers");
@@ -267,6 +281,16 @@ public class MainActivity extends AppCompatActivity {
 //
 
                 }
+
+                String[] dietLabelStrings = new String[dietLabels.length()];
+                for(int k = 0; k < dietLabels.length(); k++) {
+                    dietLabelStrings[k] = dietLabels.getString(k);
+                }
+
+                String[] healthLabelStrings = new String[healthLabels.length()];
+                for(int l = 0; l < healthLabels.length(); l++) {
+                    healthLabelStrings[l] = healthLabels.getString(l);
+                }
                // recipeModel.setIngredientLines(ingredientStrings);
 
                 //}
@@ -282,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 
 
-                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings);
+                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings, dietLabelStrings, healthLabelStrings);
                 recipeModelList.add(recipeModel);
             }
             return recipeModelList;

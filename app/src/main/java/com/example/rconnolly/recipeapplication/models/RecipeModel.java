@@ -12,8 +12,10 @@ public class RecipeModel {
     private String sourceIcon;
     private String url;
     private String[] ingredientLines;
+    private String[] dietLabels;
+    private String[] healthLabels;
 
-    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines){
+    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines, String[] dietLabels, String[] healthLabels){
 
         this.setUri(uri);
         this.setLabel(label);
@@ -22,6 +24,8 @@ public class RecipeModel {
         this.setSourceIcon(sourceIcon);
         this.setUrl(url);
         this.setIngredientLines(ingredientLines);
+        this.setDietLabels(dietLabels);
+        this.setHealthLabels(healthLabels);
     }
 
     public String getUri() {
@@ -78,5 +82,21 @@ public class RecipeModel {
 
     public void setIngredientLines(String[] ingredientLines) {
         this.ingredientLines = ingredientLines;
+    }
+
+    public String[] getDietLabels() {
+        return dietLabels;
+    }
+
+    public void setDietLabels(String[] dietLabels) {
+        this.dietLabels = dietLabels;
+    }
+
+    public String[] getHealthLabels() {
+        return healthLabels;
+    }
+
+    public void setHealthLabels(String[] healthLabels) {
+        this.healthLabels = healthLabels;
     }
 }

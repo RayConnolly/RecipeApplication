@@ -59,6 +59,8 @@ public class RecipeListAdapter extends ArrayAdapter {
             viewHolder.ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
 
             viewHolder.tvIngredientLines = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
+            viewHolder.tvDietLabels = (TextView) convertView.findViewById(R.id.tvRecipeDietLabels);
+            viewHolder.tvHealthLabels = (TextView) convertView.findViewById(R.id.tvRecipeHealthLabels);
 
             convertView.setTag(viewHolder);
         } else {
@@ -118,6 +120,8 @@ public class RecipeListAdapter extends ArrayAdapter {
 //        });
 
         viewHolder.tvIngredientLines.setText(Arrays.toString(recipeModelList.get(position).getIngredientLines()).replaceAll("\\[|\\]", ""));
+        viewHolder.tvDietLabels.setText(Arrays.toString(recipeModelList.get(position).getDietLabels()).replaceAll("\\[|\\]", ""));
+        viewHolder.tvHealthLabels.setText(Arrays.toString(recipeModelList.get(position).getHealthLabels()).replaceAll("\\[|\\]", ""));
 
         return convertView;
     }
@@ -131,6 +135,8 @@ public class RecipeListAdapter extends ArrayAdapter {
         private TextView tvRecipeUrl;
         private ImageView ivRecipeImage;
         private TextView tvIngredientLines;
+        private TextView tvDietLabels;
+        private TextView tvHealthLabels;
     }
 
 }
