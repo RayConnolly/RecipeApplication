@@ -127,12 +127,12 @@
             <!--style="?android:attr/ratingBarStyleIndicator"-->
             <!--android:isIndicator="false" />-->
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:text="@string/ingredients"-->
-            <!--android:id="@+id/tvRecipeIngredients" />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/ingredients"
+            android:id="@+id/tvRecipeIngredients" />
 
     </LinearLayout>
 

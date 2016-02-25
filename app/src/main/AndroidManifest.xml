@@ -16,22 +16,22 @@
         <activity android:name=".SplashActivity"
             android:label="@string/splash_screen_activity"
             android:theme="@style/MyCustomTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity
             android:name=".HomeActivity"
             android:label="@string/home_activity"
             android:theme="@style/MyCustomTheme">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -44,10 +44,22 @@
              <!--<category android:name="android.intent.category.LAUNCHER" />-->
              <!--</intent-filter>-->
         </activity>
+
         <activity
             android:name=".RecipeDetailActivity"
             android:label="@string/recipe_detail"
-            android:theme="@style/MyCustomTheme"></activity>
+            android:theme="@style/MyCustomTheme">
+        </activity>
+
+        <activity android:name=".FavouriteRecipeActivity"
+            android:label="@string/my_favourite_recipes"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
 
     </application>
 

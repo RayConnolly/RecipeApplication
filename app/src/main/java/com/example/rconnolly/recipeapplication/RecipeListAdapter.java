@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,6 +57,8 @@ public class RecipeListAdapter extends ArrayAdapter {
             viewHolder.tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
             //viewHolder.tvRecipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
             viewHolder.ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
+
+            viewHolder.tvIngredientLines = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
 
             convertView.setTag(viewHolder);
         } else {
@@ -114,6 +117,8 @@ public class RecipeListAdapter extends ArrayAdapter {
 //            }
 //        });
 
+        viewHolder.tvIngredientLines.setText(Arrays.toString(recipeModelList.get(position).getIngredientLines()).replaceAll("\\[|\\]", ""));
+
         return convertView;
     }
 
@@ -125,6 +130,7 @@ public class RecipeListAdapter extends ArrayAdapter {
         private ImageView ivRecipeSourceIcon;
         private TextView tvRecipeUrl;
         private ImageView ivRecipeImage;
+        private TextView tvIngredientLines;
     }
 
 }

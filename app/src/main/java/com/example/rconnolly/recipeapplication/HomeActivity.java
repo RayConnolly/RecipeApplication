@@ -18,15 +18,14 @@ public class HomeActivity extends AppCompatActivity{
     public static String[] imageNames = {"Chicken", "Beef", "Lamb", "Pork", "Seafood", "Vegetarian", "Thai", "Indian", "Chinese", "Italian"};
     public static Integer[] images = {R.drawable.chicken,
                                       R.drawable.beef,
-                                      R.drawable.lamb,
-                                      R.drawable.pork,
+                                      R.drawable.lamb_2,
+                                      R.drawable.pork_2,
                                       R.drawable.seafood,
                                       R.drawable.vegetarian,
-                                      R.drawable.lamb,
-                                      R.drawable.pork,
-                                      R.drawable.seafood,
-                                      R.drawable.vegetarian};
-    // TODO - Add new images to match 'imageNames' array values
+                                      R.drawable.thai,
+                                      R.drawable.indian,
+                                      R.drawable.chinese,
+                                      R.drawable.italian};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class HomeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_home);
 
         ImageView titleImg = (ImageView)findViewById(R.id.appTitleImg);
-        titleImg.setImageResource(R.drawable.app_title_image_3);
+        titleImg.setImageResource(R.drawable.app_title_image_2);
 
         gridView = (GridView)findViewById(R.id.gridView);
         gridView.setAdapter(new ImageGridviewAdapter(this, imageNames, images));

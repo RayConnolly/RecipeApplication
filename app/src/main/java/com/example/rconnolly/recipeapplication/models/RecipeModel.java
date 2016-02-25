@@ -11,9 +11,9 @@ public class RecipeModel {
     private String source;
     private String sourceIcon;
     private String url;
-    //private String[] ingredientLines;
+    private String[] ingredientLines;
 
-    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url){
+    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines){
 
         this.setUri(uri);
         this.setLabel(label);
@@ -21,6 +21,7 @@ public class RecipeModel {
         this.setSource(source);
         this.setSourceIcon(sourceIcon);
         this.setUrl(url);
+        this.setIngredientLines(ingredientLines);
     }
 
     public String getUri() {
@@ -71,11 +72,11 @@ public class RecipeModel {
         this.url = url;
     }
 
-//    public String[] getIngredientLines() {
-//        return ingredientLines;
-//    }
-//
-//    public void setIngredientLines(String[] ingredientLines) {
-//        this.ingredientLines = ingredientLines;
-//    }
+    public String[] getIngredientLines() {
+        return ingredientLines;
+    }
+
+    public void setIngredientLines(String[] ingredientLines) {
+        this.ingredientLines = ingredientLines;
+    }
 }

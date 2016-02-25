@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 String source = null;
                 String sourceIcon = null;
                 String url = null;
+                JSONArray ingredientLines = null;
 
                 if(recipeObject.has("uri")) {
                     if (!recipeObject.isNull("uri")) {
@@ -241,14 +242,65 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url);
+                if(recipeObject.has("ingredientLines")) {
+                    if (!recipeObject.isNull("ingredientLines")) {
+                        ingredientLines = recipeObject.getJSONArray("ingredientLines");
+                    }
+                }
+
+                //jsonObj = new JSONObject(response);
+//                jsonData = jsonObj.optJSONObject("data");
+//                JSONArray jsonArr= jsonObj.getJSONArray("numbers");
+                String[] ingredientStrings = new String[ingredientLines.length()];
+                for(int j = 0; j < ingredientLines.length(); j++) {
+                    ingredientStrings[j] = ingredientLines.getString(j);
+
+//                if(recipeObject.has("ingredientLines")) {
+//                    if (!recipeObject.isNull("ingredientLines")) {
+//                        ingredientLines = recipeObject.getJSONArray("ingredientLines");
+//                    }
+//                }
+//
+//                String[] ingredientStrings = jsonArrayToStringArray(ingredientLines);
+//
+//               // for ( int k = 0; k < ingredientStrings.length; k++){
+//
+
+                }
+               // recipeModel.setIngredientLines(ingredientStrings);
+
+                //}
+
+                // rating bar
+                //holder.rbMovieRating.setRating(movieModelList.get(position).getRating()/2);
+
+
+//                    for(int j=0; j<recipeObject.getJSONArray("ingredientLines").length(); j++){
+////                        MovieModel.Cast cast = new MovieModel.Cast();
+//                        cast.setName(finalObject.getJSONArray("cast").getJSONObject(i).getString("name"));
+//                        castList.add(cast);
+//                    }
+
+
+                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings);
                 recipeModelList.add(recipeModel);
             }
             return recipeModelList;
         }
 
+        private String[] jsonArrayToStringArray(JSONArray jsonArray) throws JSONException {
+            int arraySize = jsonArray.length();
+            String[] stringArray = new String[arraySize];
+
+            for(int i=0; i<arraySize; i++) {
+                stringArray[i] = (String) jsonArray.get(i);
+            }
+
+            return stringArray;
+        };
+
         @Override
-        protected void onPostExecute (final List <RecipeModel> result) {
+        protected void onPostExecute(final List<RecipeModel> result) {
 
             recipeAdapter = new RecipeListAdapter(getApplicationContext(), R.layout.list_recipe_category_row, result);
             lvRecipes = (ListView) findViewById(R.id.main_activity_list);

@@ -6,7 +6,7 @@
         android:id="@+id/splashScreenTitleImg"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:src="@drawable/app_title_image_3"
+        android:src="@drawable/app_title_image_2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="126dp"

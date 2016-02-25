@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="customColor">#303030</color>
-    <color name="textColor">#ffcc33</color>
+    <color name="textColor">#FFCC33</color>
     <color name="textColorTwo">#FF6A00</color>
     <color name="silver">#C0C0C0</color>
 </resources>
