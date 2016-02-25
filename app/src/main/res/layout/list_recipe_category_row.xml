@@ -118,14 +118,16 @@
         android:layout_height="wrap_content">
 
         <!--TODO - Add Rating Bar back in on Recipe Details Activity/Fragment-->
-        <RatingBar
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbRecipeRating"
-            android:stepSize=".5"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:isIndicator="false" />
+        <!--<RatingBar-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/rbRecipeRating"-->
+            <!--android:stepSize=".5"-->
+            <!--style="?android:attr/ratingBarStyleIndicator"-->
+            <!--android:isIndicator="false"-->
+            <!--android:focusable="false"-->
+            <!--android:focusableInTouchMode="false" />-->
 
         <TextView
             android:layout_width="wrap_content"
