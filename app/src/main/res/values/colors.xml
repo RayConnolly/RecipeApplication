@@ -7,4 +7,5 @@
     <color name="textColor">#FFCC33</color>
     <color name="textColorTwo">#FF6A00</color>
     <color name="silver">#C0C0C0</color>
+    <color name="white">#FFFFFF</color>
 </resources>

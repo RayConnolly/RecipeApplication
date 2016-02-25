@@ -1,4 +1,4 @@
-package com.example.rconnolly.recipeapplication;
+package com.example.rconnolly.recipeapplication.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,16 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.rconnolly.recipeapplication.R;
+
 /**
  * Created by Raymond on 24/02/2016.
  */
-public class FavouriteRecipeActivity extends AppCompatActivity {
+public class FavouriteRecipiesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.favourite_recipe_activity);
+        setContentView(R.layout.favourite_recipies_activity);
 
         final TextView myPrefs = (TextView)findViewById(R.id.txtVwMyPrefs);
         final Button savePrefs = (Button) findViewById(R.id.btnSavePrefs);

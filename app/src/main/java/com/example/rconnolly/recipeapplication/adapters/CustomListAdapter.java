@@ -1,4 +1,4 @@
-package com.example.rconnolly.recipeapplication;
+package com.example.rconnolly.recipeapplication.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rconnolly.recipeapplication.R;
 
 /**
  * Created by rconnolly on 2/16/2016.

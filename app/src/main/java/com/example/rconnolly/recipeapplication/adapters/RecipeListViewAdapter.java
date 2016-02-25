@@ -1,4 +1,4 @@
-package com.example.rconnolly.recipeapplication;
+package com.example.rconnolly.recipeapplication.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.rconnolly.recipeapplication.R;
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -22,16 +22,16 @@ import java.util.List;
 /**
  * Created by rconnolly on 2/19/2016.
  */
-public class RecipeListAdapter extends ArrayAdapter {
+public class RecipeListViewAdapter extends ArrayAdapter {
 
-    private final String LOG_TAG = RecipeListAdapter.class.getSimpleName();
+    private final String LOG_TAG = RecipeListViewAdapter.class.getSimpleName();
 
     private Context context;
     private List<RecipeModel> recipeModelList;
     private int resource;
     private LayoutInflater inflater;
 
-    public RecipeListAdapter(Context context, int resource, List<RecipeModel> recipesList) {
+    public RecipeListViewAdapter(Context context, int resource, List<RecipeModel> recipesList) {
         super(context, resource, recipesList);
 
         this.context = context;
@@ -114,7 +114,7 @@ public class RecipeListAdapter extends ArrayAdapter {
 //            @Override
 //            public void onClick(View v) {
 //
-//                Intent intent = new Intent(v.getContext(), RecipeDetailActivity.class);
+//                Intent intent = new Intent(v.getContext(), RecipeDetailsActivity.class);
 //                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                intent.putExtra("urlValue", url);
 //                context.startActivity(intent);

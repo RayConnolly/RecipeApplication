@@ -2,36 +2,104 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/fragment_title"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="41dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/fragment_image"
-        android:layout_below="@+id/fragment_title"
-        android:layout_alignLeft="@+id/fragment_title"
-        android:layout_alignStart="@+id/fragment_title"
-        android:layout_marginTop="39dp" />
+        <!--TODO - Add Rating Bar back in on Recipe Details Activity/Fragment-->
+        <!--<RatingBar-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/rbRecipeRating"-->
+        <!--android:stepSize=".5"-->
+        <!--style="?android:attr/ratingBarStyleIndicator"-->
+        <!--android:isIndicator="false"-->
+        <!--android:focusable="false"-->
+        <!--android:focusableInTouchMode="false" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/fragment_text_block"
-        android:layout_below="@+id/fragment_image"
-        android:layout_alignRight="@+id/fragment_title"
-        android:layout_alignEnd="@+id/fragment_title"
-        android:layout_marginTop="45dp" />
+        <TextView
+            android:textColor="@color/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/ingredientsLbl"
+            android:id="@+id/textIngredientsLbl" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/ingredients"
+            android:id="@+id/tvRecipeIngredients" />
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/dietLabelsLbl"
+            android:id="@+id/textDietLabelsLbl" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/diet_labels"
+            android:id="@+id/tvRecipeDietLabels" />
+
+        <TextView
+            android:textColor="@color/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/healthLabelsLbl"
+            android:id="@+id/textHealthLabelsLbl" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/health_labels"
+            android:id="@+id/tvRecipeHealthLabels" />
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="Large Text"-->
+        <!--android:id="@+id/fragment_title"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginLeft="29dp"-->
+        <!--android:layout_marginStart="29dp"-->
+        <!--android:layout_marginTop="41dp" />-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:id="@+id/fragment_image"-->
+        <!--android:layout_below="@+id/fragment_title"-->
+        <!--android:layout_alignLeft="@+id/fragment_title"-->
+        <!--android:layout_alignStart="@+id/fragment_title"-->
+        <!--android:layout_marginTop="39dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Medium Text"-->
+        <!--android:id="@+id/fragment_text_block"-->
+        <!--android:layout_below="@+id/fragment_image"-->
+        <!--android:layout_alignRight="@+id/fragment_title"-->
+        <!--android:layout_alignEnd="@+id/fragment_title"-->
+        <!--android:layout_marginTop="45dp" />-->
 </RelativeLayout>

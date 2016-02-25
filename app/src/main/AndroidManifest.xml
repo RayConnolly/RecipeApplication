@@ -13,20 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SplashActivity"
+        <activity android:name=".activities.SplashActivity"
             android:label="@string/splash_screen_activity"
             android:theme="@style/MyCustomTheme" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity
-            android:name=".HomeActivity"
-            android:label="@string/home_activity"
-            android:theme="@style/MyCustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,8 +24,19 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/recipe_category_activity"
+            android:name=".activities.FoodCategoriesActivity"
+            android:label="@string/food_categories"
+            android:theme="@style/MyCustomTheme">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".activities.RecipesListActivity"
+            android:label="@string/available_recipes"
             android:theme="@style/MyCustomTheme">
              <!--<intent-filter>-->
              <!--<action android:name="android.intent.action.MAIN" />-->
@@ -46,12 +46,12 @@
         </activity>
 
         <activity
-            android:name=".RecipeDetailActivity"
-            android:label="@string/recipe_detail"
+            android:name=".activities.RecipeDetailsActivity"
+            android:label="@string/recipe_details"
             android:theme="@style/MyCustomTheme">
         </activity>
 
-        <activity android:name=".FavouriteRecipeActivity"
+        <activity android:name=".activities.FavouriteRecipiesActivity"
             android:label="@string/my_favourite_recipes"
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->

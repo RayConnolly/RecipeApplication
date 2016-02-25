@@ -38,13 +38,19 @@
         android:padding="10dp"
         android:textColor="@color/silver" />
 
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Go to 1st Activity"-->
-        <!--android:id="@+id/second_activity_button"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true" />-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_recipe_details"
+        android:id="@+id/button_load_details" />
+
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
 
     <!--TODO Add back in for calling Recipe Source fragment-->
     <!--<WebView-->

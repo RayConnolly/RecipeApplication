@@ -117,17 +117,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--TODO - Add Rating Bar back in on Recipe Details Activity/Fragment-->
-        <!--<RatingBar-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/rbRecipeRating"-->
-            <!--android:stepSize=".5"-->
-            <!--style="?android:attr/ratingBarStyleIndicator"-->
-            <!--android:isIndicator="false"-->
-            <!--android:focusable="false"-->
-            <!--android:focusableInTouchMode="false" />-->
+        <!--&lt;!&ndash;TODO - Add Rating Bar back in on Recipe Details Activity/Fragment&ndash;&gt;-->
+        <!--&lt;!&ndash;<RatingBar&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/rbRecipeRating"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:stepSize=".5"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="?android:attr/ratingBarStyleIndicator"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:isIndicator="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:focusable="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:focusableInTouchMode="false" />&ndash;&gt;-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,6 +142,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ingredients"
             android:id="@+id/tvRecipeIngredients" />
+        <!--android:visibility="gone"-->
 
         <TextView
             android:layout_width="wrap_content"

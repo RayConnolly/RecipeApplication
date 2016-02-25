@@ -1,4 +1,4 @@
-package com.example.rconnolly.recipeapplication;
+package com.example.rconnolly.recipeapplication.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.rconnolly.recipeapplication.R;
+import com.example.rconnolly.recipeapplication.adapters.RecipeListViewAdapter;
 import com.example.rconnolly.recipeapplication.models.RecipeModel;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,16 +34,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class RecipesListActivity extends AppCompatActivity {
 
-    private RecipeListAdapter recipeAdapter;
+    private RecipeListViewAdapter recipeAdapter;
     private List<RecipeModel> recipes;
     private ListView lvRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.recipes_list_activity);
 
         // TEMP CODE
 //        WebView webView = (WebView)findViewById(R.id.webView);
@@ -262,24 +264,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                //jsonObj = new JSONObject(response);
-//                jsonData = jsonObj.optJSONObject("data");
-//                JSONArray jsonArr= jsonObj.getJSONArray("numbers");
                 String[] ingredientStrings = new String[ingredientLines.length()];
                 for(int j = 0; j < ingredientLines.length(); j++) {
                     ingredientStrings[j] = ingredientLines.getString(j);
-
-//                if(recipeObject.has("ingredientLines")) {
-//                    if (!recipeObject.isNull("ingredientLines")) {
-//                        ingredientLines = recipeObject.getJSONArray("ingredientLines");
-//                    }
-//                }
-//
-//                String[] ingredientStrings = jsonArrayToStringArray(ingredientLines);
-//
-//               // for ( int k = 0; k < ingredientStrings.length; k++){
-//
-
                 }
 
                 String[] dietLabelStrings = new String[dietLabels.length()];
@@ -291,20 +278,9 @@ public class MainActivity extends AppCompatActivity {
                 for(int l = 0; l < healthLabels.length(); l++) {
                     healthLabelStrings[l] = healthLabels.getString(l);
                 }
-               // recipeModel.setIngredientLines(ingredientStrings);
-
-                //}
 
                 // rating bar
                 //holder.rbMovieRating.setRating(movieModelList.get(position).getRating()/2);
-
-
-//                    for(int j=0; j<recipeObject.getJSONArray("ingredientLines").length(); j++){
-////                        MovieModel.Cast cast = new MovieModel.Cast();
-//                        cast.setName(finalObject.getJSONArray("cast").getJSONObject(i).getString("name"));
-//                        castList.add(cast);
-//                    }
-
 
                 recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings, dietLabelStrings, healthLabelStrings);
                 recipeModelList.add(recipeModel);
@@ -326,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final List<RecipeModel> result) {
 
-            recipeAdapter = new RecipeListAdapter(getApplicationContext(), R.layout.list_recipe_category_row, result);
+            recipeAdapter = new RecipeListViewAdapter(getApplicationContext(), R.layout.recipies_list_row, result);
             lvRecipes = (ListView) findViewById(R.id.main_activity_list);
             lvRecipes.setAdapter(recipeAdapter);
 
@@ -338,17 +314,28 @@ public class MainActivity extends AppCompatActivity {
                     TextView tvRecipeLabel = (TextView) view.findViewById(R.id.tvRecipeLabel);
                     TextView tvRecipeUri = (TextView) view.findViewById(R.id.tvRecipeUri);
 
+                    TextView tvIngredientLines = (TextView) view.findViewById(R.id.tvRecipeIngredients);
+                    TextView tvDietLabels = (TextView) view.findViewById(R.id.tvRecipeDietLabels);
+                    TextView tvHealthLabels = (TextView) view.findViewById(R.id.tvRecipeHealthLabels);
+
                     final String recipeImage = ivRecipeImage.getTag().toString();
                     final String recipeLbl = tvRecipeLabel.getText().toString();
                     final String recipeDesc = tvRecipeUri.getText().toString();
 
-                    Intent intent = new Intent(view.getContext(), RecipeDetailActivity.class);
+                    final String[] recipeIngredients = tvIngredientLines.getContext().getResources().getStringArray(0);
+                    final String[] recipeDietLabels = tvDietLabels.getContext().getResources().getStringArray(0);
+                    final String[] recipeHealthLabels = tvHealthLabels.getContext().getResources().getStringArray(0);
 
-                    intent.putExtra("recipeImg", recipeImage);
-                    intent.putExtra("recipeLbl", recipeLbl);
-                    intent.putExtra("recipeDesc", recipeDesc);
+                    Intent recipeDetailsIntent = new Intent(view.getContext(), RecipeDetailsActivity.class);
 
-                    startActivity(intent);
+                    recipeDetailsIntent.putExtra("recipeImg", recipeImage);
+                    recipeDetailsIntent.putExtra("recipeLbl", recipeLbl);
+                    recipeDetailsIntent.putExtra("recipeDesc", recipeDesc);
+                    recipeDetailsIntent.putExtra("recipeIngredients", recipeIngredients);
+                    recipeDetailsIntent.putExtra("recipeDietLabels", recipeDietLabels);
+                    recipeDetailsIntent.putExtra("recipeHealthLabels", recipeHealthLabels);
+
+                    startActivity(recipeDetailsIntent);
                 }
             });
         }

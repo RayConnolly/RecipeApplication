@@ -1,4 +1,4 @@
-package com.example.rconnolly.recipeapplication;
+package com.example.rconnolly.recipeapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
+
+import com.example.rconnolly.recipeapplication.R;
+import com.example.rconnolly.recipeapplication.adapters.FoodCategoriesGridViewAdapter;
 
 /**
  * Created by rconnolly on 2/19/2016.
  */
-public class HomeActivity extends AppCompatActivity{
+public class FoodCategoriesActivity extends AppCompatActivity{
 
     GridView gridView;
     public static String[] imageNames = {"Chicken", "Beef", "Lamb", "Pork", "Seafood", "Vegetarian", "Thai", "Indian", "Chinese", "Italian"};
@@ -30,13 +32,13 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.food_categories_activity);
 
-        ImageView titleImg = (ImageView)findViewById(R.id.appTitleImg);
-        titleImg.setImageResource(R.drawable.app_title_image_2);
+//        ImageView titleImg = (ImageView)findViewById(R.id.appTitleImg);
+//        titleImg.setImageResource(R.drawable.app_title_image_2);
 
         gridView = (GridView)findViewById(R.id.gridView);
-        gridView.setAdapter(new ImageGridviewAdapter(this, imageNames, images));
+        gridView.setAdapter(new FoodCategoriesGridViewAdapter(this, imageNames, images));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,7 +48,7 @@ public class HomeActivity extends AppCompatActivity{
 
                 final String imgBtnVal = gridView.getTag().toString().toLowerCase();
 
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), RecipesListActivity.class);
 
                 intent.putExtra("searchVal", imgBtnVal);
 
