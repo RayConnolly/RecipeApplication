@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.rconnolly.recipeapplication.R;
-import com.example.rconnolly.recipeapplication.adapters.FoodCategoriesGridViewAdapter;
+import com.example.rconnolly.recipeapplication.adapters.FoodCategoryGridViewAdapter;
 
 /**
  * Created by rconnolly on 2/19/2016.
@@ -38,7 +38,7 @@ public class FoodCategoriesActivity extends AppCompatActivity{
 //        titleImg.setImageResource(R.drawable.app_title_image_2);
 
         gridView = (GridView)findViewById(R.id.gridView);
-        gridView.setAdapter(new FoodCategoriesGridViewAdapter(this, imageNames, images));
+        gridView.setAdapter(new FoodCategoryGridViewAdapter(this, imageNames, images));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
