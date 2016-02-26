@@ -63,7 +63,7 @@
             android:id="@+id/sourceLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,6 +72,14 @@
                 android:text="@string/source_info_label"
                 android:id="@+id/textView" />
 
+            <TextView
+                android:id="@+id/tvRecipeSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/source"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginLeft="5dp" />
+
             <LinearLayout
                 android:id="@+id/sourceLinks"
                 android:layout_width="match_parent"
@@ -79,6 +87,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/ivRecipeSourceIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -92,12 +101,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical" >
 
-                        <TextView
-                            android:id="@+id/tvRecipeSource"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/source"
-                            android:textAppearance="?android:attr/textAppearanceSmall" />
+                        <!--<TextView-->
+                            <!--android:id="@+id/tvRecipeSource"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="@string/source"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
                         <TextView
                             android:visibility="gone"

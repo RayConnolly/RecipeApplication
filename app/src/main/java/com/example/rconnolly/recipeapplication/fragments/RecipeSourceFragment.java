@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 import com.example.rconnolly.recipeapplication.R;
 
@@ -31,10 +30,6 @@ public class RecipeSourceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.recipe_source_fragment, container, false);
-
-//        TextView textView = (TextView) view.findViewById(R.id.recipeSourceFragment);
-//
-//        textView.setText("FRAGMENT 2");
 
         WebView browser = (WebView) view.findViewById(R.id.webView);
         browser.getSettings().setLoadsImagesAutomatically(true);
