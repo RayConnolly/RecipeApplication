@@ -130,6 +130,7 @@
             <!--&lt;!&ndash;android:focusableInTouchMode="false" />&ndash;&gt;-->
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -137,14 +138,15 @@
             android:id="@+id/textIngredientsLbl" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ingredients"
             android:id="@+id/tvRecipeIngredients" />
-        <!--android:visibility="gone"-->
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -152,6 +154,7 @@
             android:id="@+id/textDietLabelsLbl" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -159,6 +162,7 @@
             android:id="@+id/tvRecipeDietLabels" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -166,6 +170,7 @@
             android:id="@+id/textHealthLabelsLbl" />
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"

@@ -24,8 +24,8 @@ public class IngredientsFragment extends Fragment {
     private String recipeDietLabels;
     private String recipeHealthLabels;
 
-    public IngredientsFragment(){}
-
+//    public IngredientsFragment(){}
+//
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
