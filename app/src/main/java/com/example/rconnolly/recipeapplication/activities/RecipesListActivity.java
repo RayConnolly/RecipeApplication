@@ -313,6 +313,7 @@ public class RecipesListActivity extends AppCompatActivity {
                     ImageView ivRecipeImage = (ImageView) view.findViewById(R.id.ivRecipeImage);
                     TextView tvRecipeLabel = (TextView) view.findViewById(R.id.tvRecipeLabel);
                     TextView tvRecipeUri = (TextView) view.findViewById(R.id.tvRecipeUri);
+                    TextView tvRecipeUrl = (TextView) view.findViewById(R.id.tvRecipeUrl);
 
                     TextView tvIngredientLines = (TextView) view.findViewById(R.id.tvRecipeIngredients);
                     TextView tvDietLabels = (TextView) view.findViewById(R.id.tvRecipeDietLabels);
@@ -321,6 +322,7 @@ public class RecipesListActivity extends AppCompatActivity {
                     final String recipeImage = ivRecipeImage.getTag().toString();
                     final String recipeLbl = tvRecipeLabel.getText().toString();
                     final String recipeDesc = tvRecipeUri.getText().toString();
+                    final String recipeUrl = tvRecipeUrl.getText().toString();
 
                     final String recipeIngredients = tvIngredientLines.getText().toString();
                     final String recipeDietLabels = tvDietLabels.getText().toString();
@@ -331,6 +333,7 @@ public class RecipesListActivity extends AppCompatActivity {
                     recipeDetailsIntent.putExtra("recipeImg", recipeImage);
                     recipeDetailsIntent.putExtra("recipeLbl", recipeLbl);
                     recipeDetailsIntent.putExtra("recipeDesc", recipeDesc);
+                    recipeDetailsIntent.putExtra("recipeUrl", recipeUrl);
                     recipeDetailsIntent.putExtra("recipeIngredients", recipeIngredients);
                     recipeDetailsIntent.putExtra("recipeDietLabels", recipeDietLabels);
                     recipeDetailsIntent.putExtra("recipeHealthLabels", recipeHealthLabels);

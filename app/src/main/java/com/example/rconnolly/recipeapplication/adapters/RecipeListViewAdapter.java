@@ -56,7 +56,6 @@ public class RecipeListViewAdapter extends ArrayAdapter {
             viewHolder.tvRecipeSource = (TextView) convertView.findViewById(R.id.tvRecipeSource);
             viewHolder.ivRecipeSourceIcon = (ImageView) convertView.findViewById(R.id.ivRecipeSourceIcon);
             viewHolder.tvRecipeUrl = (TextView) convertView.findViewById(R.id.tvRecipeUrl);
-            //viewHolder.tvRecipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
             viewHolder.ivRecipeImage = (ImageView) convertView.findViewById(R.id.ivRecipeImage);
 
             viewHolder.tvIngredientLines = (TextView) convertView.findViewById(R.id.tvRecipeIngredients);
@@ -104,22 +103,7 @@ public class RecipeListViewAdapter extends ArrayAdapter {
         viewHolder.tvRecipeUri.setText(recipeModelList.get(position).getUri());
 
         // Recipe Url
-        //viewHolder.tvRecipeUrl.setAutoLinkMask(Linkify.ALL);
-
         viewHolder.tvRecipeUrl.setText(recipeModelList.get(position).getUrl());
-
-//        final String url = viewHolder.tvRecipeUrl.getText().toString().toLowerCase();
-//
-//        viewHolder.tvRecipeUrl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(v.getContext(), RecipeDetailsActivity.class);
-//                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("urlValue", url);
-//                context.startActivity(intent);
-//            }
-//        });
 
         viewHolder.tvIngredientLines.setText(Arrays.toString(recipeModelList.get(position).getIngredientLines()).replaceAll("\\[|\\]", ""));
         viewHolder.tvDietLabels.setText(Arrays.toString(recipeModelList.get(position).getDietLabels()).replaceAll("\\[|\\]", ""));

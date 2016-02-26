@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,6 +28,7 @@ public class RecipeDetailsActivity extends FragmentActivity {
     private String recipeImgUrl = null;
     private String recipeLbl = null;
     private String recipeDesc = null;
+    private String recipeUrl = null;
     private String recipeIngredients = null;
     private String recipeDietLabels = null;
     private String recipeHealthLabels = null;
@@ -63,6 +63,7 @@ public class RecipeDetailsActivity extends FragmentActivity {
             recipeImgUrl = bundle.getString("recipeImg");
             recipeLbl = bundle.getString("recipeLbl");
             recipeDesc = bundle.getString("recipeDesc");
+            recipeUrl = bundle.getString("recipeUrl");
             recipeIngredients = bundle.getString("recipeIngredients");
             recipeDietLabels = bundle.getString("recipeDietLabels");
             recipeHealthLabels = bundle.getString("recipeHealthLabels");
@@ -111,9 +112,10 @@ public class RecipeDetailsActivity extends FragmentActivity {
                 Fragment fragment = null;
                 if(v == findViewById(R.id.button_load_details)){
                     fragment = new IngredientsFragment();
-                    setArgumentDetails(fragment);
+                    setRecipeDetails(fragment);
                 } else {
                     fragment = new RecipeSourceFragment();
+                    setSourceDetails(fragment);
                 }
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -128,45 +130,29 @@ public class RecipeDetailsActivity extends FragmentActivity {
         btnLoadSource.setOnClickListener(listener);
     }
 
-        private void setArgumentDetails(Fragment fragment){
+    private void setRecipeDetails(Fragment fragment){
 
-            Bundle bundle = new Bundle();
-            String ingredients = recipeIngredients;
-            String dietLbls = recipeDietLabels;
-            String healthLbls = recipeHealthLabels;
+        Bundle bundle = new Bundle();
+        String ingredients = recipeIngredients;
+        String dietLbls = recipeDietLabels;
+        String healthLbls = recipeHealthLabels;
 
-            bundle.putString("ingredients", ingredients);
-            bundle.putString("dietLbls", dietLbls);
-            bundle.putString("healthLbls", healthLbls);
+        bundle.putString("ingredients", ingredients);
+        bundle.putString("dietLbls", dietLbls);
+        bundle.putString("healthLbls", healthLbls);
 
-            fragment.setArguments(bundle);
-        }
-
-//        Bundle bundle = getIntent().getExtras();
-//
-//        if (bundle != null){
-//            url = bundle.getString("uriValue");
-//        }
-//
-//        WebView browser = (WebView)findViewById(R.id.webView);
-//        browser.getSettings().setLoadsImagesAutomatically(true);
-//        browser.getSettings().setJavaScriptEnabled(true);
-//        browser.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-//        browser.loadUrl(url);
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-
-//        button = (Button) findViewById(R.id.second_activity_button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(view.getContext(), RecipesListActivity.class);
-//
-//                startActivity(intent);
-//            }
-//        });
+        fragment.setArguments(bundle);
     }
+
+    private void setSourceDetails(Fragment fragment){
+
+        Bundle bundle = new Bundle();
+        String sourceUrl = recipeUrl;
+
+        bundle.putString("sourceUrl", sourceUrl);
+
+        fragment.setArguments(bundle);
+    }
+
+}
 
