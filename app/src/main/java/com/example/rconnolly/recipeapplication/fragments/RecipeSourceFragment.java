@@ -32,9 +32,9 @@ public class RecipeSourceFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.recipe_source_fragment, container, false);
 
-        TextView textView = (TextView) view.findViewById(R.id.recipeSourceFragment);
-
-        textView.setText("This is FRAGMENT 2");
+//        TextView textView = (TextView) view.findViewById(R.id.recipeSourceFragment);
+//
+//        textView.setText("FRAGMENT 2");
 
         WebView browser = (WebView) view.findViewById(R.id.webView);
         browser.getSettings().setLoadsImagesAutomatically(true);

@@ -17,7 +17,7 @@
     <string name="recipe_uri">Recipe Uri</string>
     <string name="recipe_url">Recipe Url</string>
     <string name="title_activity_image_category">ImageCategoryActivity</string>
-    <string name="source_info_label">Source Information</string>
+    <string name="source_info_label">Source</string>
     <string name="home_page_title">What\'s For Dinner?</string>
     <string name="choose_food_type">Choose Food Type</string>
     <string name="my_favourite_recipes">My Favourite Recipes</string>

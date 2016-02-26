@@ -7,11 +7,12 @@
         android:textColor="@color/textColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This is the Recipe Source Fragment"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Recipe Source Fragment"
         android:id="@+id/recipeSourceFragment"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
     <WebView
         android:id="@+id/webView"
@@ -19,5 +20,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:padding="5dp" />
 </LinearLayout>
