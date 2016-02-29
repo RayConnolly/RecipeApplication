@@ -40,6 +40,18 @@
         android:padding="10dp"
         android:textColor="@color/silver" />
 
+    <RatingBar
+        android:id="@+id/rbRecipeRating"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:isIndicator="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

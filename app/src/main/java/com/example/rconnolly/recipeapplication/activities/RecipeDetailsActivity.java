@@ -1,5 +1,7 @@
 package com.example.rconnolly.recipeapplication.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,11 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rconnolly.recipeapplication.R;
 import com.example.rconnolly.recipeapplication.fragments.IngredientsFragment;
 import com.example.rconnolly.recipeapplication.fragments.RecipeSourceFragment;
+import com.example.rconnolly.recipeapplication.models.RecipeModel;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -22,6 +28,13 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class RecipeDetailsActivity extends FragmentActivity {
 
@@ -36,8 +49,13 @@ public class RecipeDetailsActivity extends FragmentActivity {
     private RecipeSourceFragment recipeSourceFragment;
     private Button btnLoadDetails;
     private Button btnLoadSource;
+    private RatingBar ratingBar;
+    private SharedPreferences sharedPreferences;
+    String[] favs;
+    private Set<String> recipeSet;
+    private List favourites;
+    private int count;
 
-    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +123,40 @@ public class RecipeDetailsActivity extends FragmentActivity {
         tvRecipeLbl.setText(recipeLbl);
         //tvRecipeDesc.setText(recipeDesc);
 
+        // FAVOURITES TEMP CODE
+
+        sharedPreferences = getSharedPreferences("FAVOURITES", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        ratingBar = (RatingBar)findViewById(R.id.rbRecipeRating);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+
+                //RecipeModel recipe = new RecipeModel(null, recipeLbl, recipeImgUrl, null, null, null, null, null, null, rating);
+
+                Map prefsMap = new HashMap();
+                prefsMap.put("recipeImg", recipeImgUrl);
+                prefsMap.put("recipeLabel", recipeLbl);
+                prefsMap.put("recipeRating", rating);
+
+                //recipeSet = new HashSet<>(prefsMap.values());
+
+                editor.putString("FAVOURITES" + count, prefsMap.toString());
+
+                editor.commit();
+
+                count++;
+
+                Toast.makeText(RecipeDetailsActivity.this, "Your rating has been saved." + prefsMap.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+        // .END TEMP FAVOUTITES CODE
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +204,19 @@ public class RecipeDetailsActivity extends FragmentActivity {
         bundle.putString("sourceUrl", sourceUrl);
 
         fragment.setArguments(bundle);
+    }
+
+    private Set<String> createRecipeSet(RecipeModel recipe){
+
+        recipeSet = new HashSet<>();
+
+        Gson gson = new Gson();
+        String gsonStr = gson.toJson(recipe);
+        //favs = new String[5];
+
+        recipeSet.add(gsonStr);
+
+        return recipeSet;
     }
 
 }

@@ -3,21 +3,39 @@
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tvFavRecipeImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Pefs to go here..."
-        android:id="@+id/txtVwMyPrefs"
+        android:text="Recipe image to go here..."
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp" />
 
-    <Button
+    <TextView
+        android:id="@+id/tvFavRecipeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Prefs"
-        android:id="@+id/btnSavePrefs"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Recipe label to go here..."
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:id="@+id/tvFavRecipeRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Recipe rating to go here..."
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp" />
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Save Prefs"-->
+        <!--android:id="@+id/btnSavePrefs"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="15dp" />-->
 
     <Button
         android:layout_width="wrap_content"

@@ -1,12 +1,16 @@
 package com.example.rconnolly.recipeapplication.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by rconnolly on 2/17/2016.
  */
 public class RecipeModel {
 
     private String uri;
+    @SerializedName("recipeLabel")
     private String label;
+    @SerializedName("recipeImage")
     private String image;
     private String source;
     private String sourceIcon;
@@ -16,7 +20,7 @@ public class RecipeModel {
     private String[] healthLabels;
     private Float rating;
 
-    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines, String[] dietLabels, String[] healthLabels){
+    public RecipeModel(String uri, String label, String image, String source, String sourceIcon, String url, String[] ingredientLines, String[] dietLabels, String[] healthLabels, Float rating){
 
         this.setUri(uri);
         this.setLabel(label);
@@ -27,6 +31,7 @@ public class RecipeModel {
         this.setIngredientLines(ingredientLines);
         this.setDietLabels(dietLabels);
         this.setHealthLabels(healthLabels);
+        this.rating = rating;
     }
 
     public String getUri() {
@@ -99,5 +104,13 @@ public class RecipeModel {
 
     public void setHealthLabels(String[] healthLabels) {
         this.healthLabels = healthLabels;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 }

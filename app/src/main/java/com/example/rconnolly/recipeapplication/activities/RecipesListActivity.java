@@ -282,7 +282,7 @@ public class RecipesListActivity extends AppCompatActivity {
                 // rating bar
                 //holder.rbMovieRating.setRating(movieModelList.get(position).getRating()/2);
 
-                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings, dietLabelStrings, healthLabelStrings);
+                recipeModel = new RecipeModel(uri, label, image, source, sourceIcon, url, ingredientStrings, dietLabelStrings, healthLabelStrings, null);
                 recipeModelList.add(recipeModel);
             }
             return recipeModelList;

@@ -12,24 +12,30 @@
         android:layout_marginTop="126dp"
         android:padding="10dp" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choose_food_type"
-        android:id="@+id/splashScreenButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="146dp"
-        android:padding="5dp" />
+        android:orientation="horizontal">
 
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="@string/my_favourites"-->
-    <!--android:id="@+id/splashScreenFavouritesButton"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginBottom="146dp"-->
-    <!--android:padding="5dp" />-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_food_type"
+            android:id="@+id/splashScreenButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="146dp"
+            android:padding="5dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_favourites"
+            android:id="@+id/splashScreenFavouritesButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="146dp"
+            android:padding="5dp" />
+
+    </LinearLayout>
 </RelativeLayout>

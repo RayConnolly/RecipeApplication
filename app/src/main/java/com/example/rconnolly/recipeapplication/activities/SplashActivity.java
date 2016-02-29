@@ -14,7 +14,7 @@ import com.example.rconnolly.recipeapplication.R;
 public class SplashActivity extends AppCompatActivity {
 
     private Button foodTypeBtn;
-//    private Button favouritesBtn;
+    private Button favouritesBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen_activity);
 
         foodTypeBtn = (Button) findViewById(R.id.splashScreenButton);
-//        favouritesBtn = (Button) findViewById(R.id.splashScreenFavouritesButton);
+        favouritesBtn = (Button) findViewById(R.id.splashScreenFavouritesButton);
 
         foodTypeBtn.setBackgroundResource(R.drawable.button);
-//        favouritesBtn.setBackgroundResource(R.drawable.button);
+        favouritesBtn.setBackgroundResource(R.drawable.button);
 
         foodTypeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,14 +38,14 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-//        favouritesBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getApplicationContext(), FavouriteRecipiesActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
+        favouritesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), FavouriteRecipiesActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }
