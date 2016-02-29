@@ -1,6 +1,5 @@
 package com.example.rconnolly.recipeapplication.activities;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -133,27 +131,19 @@ public class RecipeDetailsActivity extends FragmentActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
-
-                //RecipeModel recipe = new RecipeModel(null, recipeLbl, recipeImgUrl, null, null, null, null, null, null, rating);
-
                 Map prefsMap = new HashMap();
                 prefsMap.put("recipeImg", recipeImgUrl);
                 prefsMap.put("recipeLabel", recipeLbl);
                 prefsMap.put("recipeRating", rating);
 
-                //recipeSet = new HashSet<>(prefsMap.values());
-
-                editor.putString("FAVOURITES" + count, prefsMap.toString());
+                editor.putString("FAVOURITES_" + count, prefsMap.toString());
 
                 editor.commit();
 
-                count++;
-
                 Toast.makeText(RecipeDetailsActivity.this, "Your rating has been saved." + prefsMap.toString(), Toast.LENGTH_SHORT).show();
             }
-
         });
-
+        count++;
 
         // .END TEMP FAVOUTITES CODE
 

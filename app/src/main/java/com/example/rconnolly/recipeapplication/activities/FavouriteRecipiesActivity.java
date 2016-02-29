@@ -3,20 +3,16 @@ package com.example.rconnolly.recipeapplication.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rconnolly.recipeapplication.R;
-import com.example.rconnolly.recipeapplication.models.RecipeModel;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Raymond on 24/02/2016.
@@ -74,23 +70,26 @@ public class FavouriteRecipiesActivity extends AppCompatActivity {
 
                 for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
 
-                    prefsList.add(entry.getValue().toString());
+                    Toast.makeText(getApplicationContext(),  entry.getKey() + "/" + entry.getValue(), Toast.LENGTH_LONG).show();
+
+//                    prefsList.add(entry.getValue().toString());
+
+                    //if (entry.getKey().equals(recipeRating)) {
+
+                        //prefsList.add(recipeRating.floatValue());
 
 
-
-                    if (entry.getKey().contains(recipeRating.toString())) {
-
-                        if (recipeRating.floatValue() == 5.0) {
-
-                            favRecipeLabel.setText("Recipe rating of: " + recipeLabel);
-                            favRecipeRating.setText("Recipe rating: " + recipeRating);
-
-                            //Toast.makeText(FavouriteRecipiesActivity.this, "Data loaded successfully!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                    //}
                 }
             }
         });
+
+
+    }
+
+    private List<?> getTopRatedRecipes(){
+
+        return null;
     }
 }
 
